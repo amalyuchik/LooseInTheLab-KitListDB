@@ -1,0 +1,42 @@
+nav {
+    padding-left: 20px;
+}
+nav ul li{
+    text-decoration: none;
+    list-style: none;
+    display: inline;
+}
+/*form{*/
+    /*padding: 20px 20px 20px 20px;*/
+/*}*/
+section{
+    width: 100%;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+    padding-top: 70px;
+}
+.table_header{
+    background-color: bisque;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+tr:nth-child(even){
+    background-color: #f1f1f1;
+}
+td p{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0px 5px 0px 0px;
+}
+label{
+    text-align: right;
+    display: inline-block;
+}
+.header {
+    width: 80%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
