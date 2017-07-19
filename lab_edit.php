@@ -93,8 +93,12 @@ if(isset($lab_id))
 </head>
 
 <body>
+<body>
+<div class="container">
+    <div class="row">
+        <section>
 <h1><?php echo $edit_lab_result[0]['lab_name']; ?></h1>
-<form  action="<?php $thispage ?>" method="post">
+<form class="form-inline" action="<?php $thispage ?>" method="post">
     <label>Lab Name: &nbsp;</label>
     <input type="text" size="60" name="lab_name" value="<?php echo $edit_lab_result[0]['lab_name']; ?>"><br /><br />
 
@@ -108,7 +112,7 @@ if(isset($lab_id))
     <input type="submit"  value="Save" >
 </form><br /><br />
 <form  action="<?php $thispage ?>" method="post" name="product">
-<table>
+<table style="table-layout: auto; width: 100%;">
 
 
     <?php
@@ -131,7 +135,7 @@ if(isset($lab_id))
         foreach($lab_line_products_result as $k=>$v)
         {
             echo "<tr>";
-            echo "<td><p>";
+            echo "<td><p style='width: 200px;'>";
             echo "<a href=\"".$base_url."kit_db/product_edit.php?product_id=";
             echo $v['lab_product_line_product_id_fk']."\">".$v['product_name']."</a>";
             echo "</p></td>";
@@ -201,8 +205,19 @@ if(isset($lab_id))
     ?>
 </table>
 </form>
+        </section>
+    </div>
 
-<footer style="height: 200px; background-color: #f1f1f1;"></footer>
+    <?php $navigation = new site_nav(); ?>
+
+    <footer>
+        <p>Copyright 2017 ASM</p>
+    </footer>
+</div>
+<script type="text/javascript">
+    document.getElementById('testing').innerHTML = strUser;
+</script>
+</body>
 </body>
 
 </html>

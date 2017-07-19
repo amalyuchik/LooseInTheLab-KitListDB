@@ -8,6 +8,7 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
 $conn = new connections();
 $select_sql = new select_sql();
 $book_name = '';
@@ -97,22 +98,17 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
     <div class="col-lg-9 col-md-8 col-sm-7">
 
         <article>
-            <header>
-                <h1>Testing</h1>
-            </header>
             <?php
             if ($_GET['book_id'] !== null)
+            {
                 $book_contents = new book_detail($connection_array, '',$_GET['book_id'],$conn,$select_sql);
+            }
             ?>
         </article>
     </div>
     </div>
-</div>
-
-
-
-
 </section>
+</div>
 
 		<?php $navigation = new site_nav(); ?>
 

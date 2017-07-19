@@ -20,9 +20,8 @@ class select_input
         $this->selected_item_id = $selected_item_id;
 
         if($this->label !== '')
-            echo "<label for='".$this->select_name."' class=\"col-lg-2 control-label\">$this->label: </label>";
-            echo "";
-        echo "<div class=\"col-lg-10\"><select onchange='alertMessage($this->select_name);' class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
+            echo "<label for='".$this->select_name."' class=\"control-label\">$this->label: &nbsp; </label>";
+        echo "<div class=\"form-group\" style='margin-right: 20px;'><select onchange='alertMessage($this->select_name);' class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
         echo "<option value=\"\">Select ".$this->label."</option>\n\r"; //Need to make this as an initial selected item
         foreach($this->data_array as $arr)
         {
@@ -33,7 +32,7 @@ class select_input
 
             echo " >".$arr['data']."</option>";
         }
-        echo "</input>";
+        //echo "</input>";
         echo "</select></div>";
         if($this->label !== '')
            echo "&nbsp";
