@@ -84,7 +84,7 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
     //                    echo "</tr>";
                 $do_once = $do_once - $do_once;
                 foreach ($sql_execute as $k => $v) {
-                    echo "<a class=\"list-group-item\" href=\"" . $base_url . "kit_db/lab_edit.php?lab_id=";
+                    echo "<a class=\"list-group-item\" href=\"" . $thispage . "?book_id=";
                     echo $sql_execute[$do_once]['book_id'] . "\">" . $sql_execute[$do_once]['Book Name'];
                     echo "</a>";
                     echo "\n\r";
@@ -94,6 +94,10 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
             ?>
             </div>
         </div>
+    <div class="col-lg-9 col-md-8 col-sm-7">
+        <h1>Testing</h1>
+
+    </div>
     </div>
 </div>
 
