@@ -8,6 +8,7 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
 $conn = new connections();
 $select_sql = new select_sql();
 $book_name = '';
@@ -95,53 +96,19 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
             </div>
         </div>
     <div class="col-lg-9 col-md-8 col-sm-7">
-        <h1>Testing</h1>
 
+        <article>
+            <?php
+            if ($_GET['book_id'] !== null)
+            {
+                $book_contents = new book_detail($connection_array, '',$_GET['book_id'],$conn,$select_sql);
+            }
+            ?>
+        </article>
     </div>
     </div>
-</div>
-
-
-    <article>
-        <header>
-        </header>
-    <?php
-    if($sql_execute !== null)
-    {
-        echo "<table style='border: solid 1px black;'>";
-        echo "<tr> ";
-        foreach ($sql_execute[0] as $k => $v) {
-            if ($do_once < count($sql_execute[0]))
-                echo "<th class=\"table_header\">" . $k . "</th>";
-            else
-                continue;
-
-            $do_once++;
-        }
-        echo "</tr>";
-        $do_once = $do_once-$do_once;
-        foreach($sql_execute as $k=>$v)
-        {
-            echo "<tr><td style=\"padding-left:5px;padding-right:5px;border:1px solid black;\">";
-            echo "<a href=\"".$base_url."kit_db/lab_edit.php?lab_id=";
-            echo $sql_execute[$do_once]['Lab ID']."\">".$sql_execute[$do_once]['Lab ID']."</a>";
-            echo "</td><td style=\"padding-left:5px;padding-right:5px;border:1px solid black;\">";
-            echo $sql_execute[$do_once]['Lab Name'];
-            echo "</td></tr>";
-            $book_name = $sql_execute[$do_once]['Book Name'];
-            $do_once++;
-        }
-//            foreach (new TableRows(new RecursiveArrayIterator($sql_execute)) as $k => $v)
-//            {
-//                echo $v;
-//            }
-        echo "</table>";
-    }
-    echo "<p>". count($sql_execute) ."Labs in this book.</p>";
-    ?>
-    </article>
-
 </section>
+</div>
 
 		<?php $navigation = new site_nav(); ?>
 
