@@ -21,6 +21,7 @@ class add_lab_product
         echo "<tr style=\"background-color: lemonchiffon;\">";
         echo "<td><p style=\"width:200px;\">";
         $select_field_product = new select_input($global_product_names_list,'','product_id');
+        echo $select_field_product->create_select_field(false);
         echo "</p></td>";
 
         echo "<td><p>";

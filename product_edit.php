@@ -71,7 +71,8 @@ if(isset($product_id))
     <input type="text" size="60" name="product_name" value="<?php echo $product_name; ?>"><br /><br />
     <label>Description: &nbsp;</label>
     <textarea rows="4" cols="59" name="product_description"><?php echo $product_description; ?></textarea><br /><br />
-    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category',$product_category); ?>&nbsp;
+    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category',$product_category);
+    echo $select_field_categories->create_select_field(false);?>&nbsp;
     <br /><br /><label>Cost: &nbsp;</label>
     <input type="text" size="60" name="product_cost" value="<?php echo $product_cost; ?>"><br /><br />
     <label>Price: &nbsp;</label>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
-      <paths name="LLKitDatabase">
+      <paths name="SeriouslyFunnyScience">
         <serverdata>
           <mappings>
             <mapping deploy="/kit_db" local="$PROJECT_DIR$" web="/" />
@@ -12,4 +12,3 @@
     </serverData>
   </component>
 </project>
-

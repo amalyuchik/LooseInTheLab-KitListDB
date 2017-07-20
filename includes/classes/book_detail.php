@@ -8,6 +8,7 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/add_lab_to_book.php");
 
 class book_detail
 {
@@ -16,7 +17,7 @@ class book_detail
     var $book_id;
     var $conn;
     var $select_sql;
-
+    var $global_lab_names_list = array();
     var $book_detail_html_string = '';
 
     /**
@@ -27,7 +28,7 @@ class book_detail
      * @param $conn
      * @param $select_sql
      */
-    public function __construct(array $connection_array, $book_name, $book_id, $conn, $select_sql, $book_detail_html_string = '', $base_url = "http://www.seriouslyfunnyscience.com/")
+    public function __construct(array $connection_array, $book_name, $book_id, $conn, $select_sql, $book_detail_html_string = '', $base_url = "http://www.seriouslyfunnyscience.com/", array $global_lab_names_list = null)
     {
         $this->connection_array = $connection_array;
         $this->book_name = $book_name; //As of right now, this is empty. May change in the future
@@ -35,49 +36,72 @@ class book_detail
         $this->conn = $conn;
         $this->select_sql = $select_sql;
         $this->book_detail_html_string = $book_detail_html_string;
-        $this->base_url = $base_url;
-        echo $this->retrieve_book($this->book_id);
+        $this->global_lab_names_list = $global_lab_names_list;
+        $this->base_url = $base_url = "http://www.seriouslyfunnyscience.com/";
+//        $base_url = "http://www.seriouslyfunnyscience.com/";
+        $thispage = $_SERVER['PHP_SELF'];
+        $do_once = 0;
+        echo $this->retrieve_book($this->book_id,$this->global_lab_names_list);
     }
 
 
-    function retrieve_book($bk_id)
+    function retrieve_book($bk_id, $global_lab_names_list)
     {
         $query_select = $this->select_sql->query("book_contents", null, null, $bk_id);
         $sql_execute = $this->conn->runconn_sql_execute($this->connection_array, $query_select);
   //      var $do_once=0;
         if($sql_execute !== null)
         {
-            $this->book_detail_html_string .= "<header><h1>Testing</h1></header>";
-            $this->book_detail_html_string .=  "<table style='border: solid 1px black;'>";
+            $this->book_detail_html_string .= "<header><h1>Test</h1></header>";
+            $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
+
+
+            $this->book_detail_html_string .=  "<table id='book_detail_table' style='border: solid 1px grey;'>";
             $this->book_detail_html_string .=  "<tr> ";
-            foreach ($sql_execute[0] as $k => $v) {
-                if ($do_once < count($sql_execute[0]))
-                    $this->book_detail_html_string .=  "<th class=\"table_header\">" . $k . "</th>";
+            foreach ($sql_execute[0] as $k => $v)
+            {
+                if ($do_once < count($sql_execute[0])) {
+                    $this->book_detail_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">" . $k . "</th>";
+                }
                 else
                     continue;
 
                 $do_once++;
             }
+
             $this->book_detail_html_string .=  "</tr>";
             $do_once = $do_once-$do_once;
+
+            if(isset($_GET['add_lab']))
+            {
+                $add_row = new add_lab_to_book($global_lab_names_list,$this->book_id);
+                $this->book_detail_html_string .= $add_row->return_value_string($global_lab_names_list,'', $_SERVER['PHP_SELF']);
+            }
+            else
+                $add_row = null;
+            if($add_row == null)
+                $this->book_detail_html_string .= "<tr class='blank_white_row' style='border-bottom:1px solid grey;'><td><a style=\"color: red;font-weight: bold; font-size: 15px;\" href=\"$thispage?book_id=$this->book_id&add_lab=1\">Add a Lab</a></td><td></td><td></td></tr>";
+
             foreach($sql_execute as $k=>$v)
             {
-                $this->book_detail_html_string .=  "<tr><td style=\"padding-left:5px;padding-right:5px;border:1px solid black;\">";
+                $this->book_detail_html_string .=  "<tr><td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;text-align: center;\">";
                 $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/lab_edit.php?lab_id=";
                 $this->book_detail_html_string .=  $sql_execute[$do_once]['Lab ID']."\">".$sql_execute[$do_once]['Lab ID']."</a>";
-                $this->book_detail_html_string .=  "</td><td style=\"padding-left:5px;padding-right:5px;border:1px solid black;\">";
-                $this->book_detail_html_string .=  $sql_execute[$do_once]['Lab Name'];
-                $this->book_detail_html_string .=  "</td></tr>";
-                $this->book_name = $sql_execute[$do_once]['Book Name'];
+                $this->book_detail_html_string .=  "</td><td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;min-width: 300px;\">";
+                $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/lab_edit.php?lab_id=".$sql_execute[$do_once]['Lab ID']."\">".$sql_execute[$do_once]['Lab Name']."</a>";
+                $this->book_detail_html_string .=  "</td>";
+                $this->book_detail_html_string .=  "<td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;\"><p style=\"padding - right:10px;min-width:30px;text-align:center;\">&nbsp;<a href=\"". $thispage . "?book_id=".$this->book_id."&record_id=".$sql_execute[$do_once]['X']."&delete=1\" ><i style = \"color: red;\" class=\"fa fa-trash-o\" aria - hidden = \"true\" ></i ></a ></p></td></tr>"."\r\n";
+
                 $do_once++;
             }
+            $this->book_name = $sql_execute[$do_once]['Book Name'];
 //            foreach (new TableRows(new RecursiveArrayIterator($sql_execute)) as $k => $v)
 //            {
 //                echo $v;
 //            }
             $this->book_detail_html_string .=  "</table>";
         }
-        $this->book_detail_html_string .=  "<p>". count($sql_execute) ."Labs in this book.</p>";
+
         return $this->book_detail_html_string;
     }
 

@@ -104,7 +104,9 @@ if(isset($lab_id))
 
     <?php
     $select_field_types = new select_input($global_lab_types_list,'Types','lab_type',$edit_lab_result[0]['lab_type_id_fk']);
+    echo $select_field_types->create_select_field(false);
     $select_field_categories = new select_input($global_lab_categories_list,'Categories','lab_category',$edit_lab_result[0]['lab_category_id_fk']);
+    echo $select_field_categories->create_select_field(false);
     ?>
 <br /><br />
     <label>Video Link: &nbsp;</label>
@@ -199,9 +201,9 @@ if(isset($lab_id))
             $add_row = null;
     }
     else
-        echo "<tr><td>No Products in this lab.</td></tr>";
+        echo "<tr><td><strong>No Products in this lab.</strong></td></tr>";
     if($add_row == null)
-        echo "<tr><td style=\"padding: 10px 0px 10px 10px;background-color: white;\"><a style=\"color: red;font-weight: bold; font-size: 15px;\" href=\"$thispage?lab_id=$lab_id&add_product=1\">Add Product</a></td></tr>";
+        echo "<tr class='blank_white_row'><td><a style=\"color: red;font-weight: bold; font-size: 15px;\" href=\"$thispage?lab_id=$lab_id&add_product=1\">Add Product</a></td></tr>";
     ?>
 </table>
 </form>

@@ -105,6 +105,11 @@ if($global_product_names_list == null)
     $query_product_names = $select_sql->query("products");
     $global_product_names_list = $conn_globals->runconn_sql_execute($connection_array, $query_product_names);
 }
+if($global_lab_names_list == null)
+{
+    $query_lab_names = $select_sql->query("all_labs");
+    $global_lab_names_list = $conn_globals->runconn_sql_execute($connection_array, $query_lab_names);
+}
 
 
 

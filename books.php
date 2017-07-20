@@ -17,6 +17,12 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
 	$query_select = $select_sql->query("books", $state_submit, $grade_submit);
 	$sql_execute = $conn->runconn_sql_execute($connection_array, $query_select);
 }
+if(isset($_GET['delete']))
+{
+    $delete_conn = new connections();
+    $delete_query = $delete_conn->query_construct('delete',array('book_lab_line'),array('book_lab_line_id'=> $_GET['record_id']));
+    $delete_query_execute = $delete_conn->runconn_sql_execute($connection_array,$delete_query);
+}
 ?>
 <!DOCTYPE HTML>
 
@@ -26,7 +32,8 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
 	<META NAME="ROBOTS" CONTENT="NONE">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<?php echo $bootstrapLink;
-			echo $jQueryLink; ?>
+			echo $jQueryLink;
+            echo $fontAwesomeLink;?>
 	<link rel="stylesheet" href="css/nav_style.css" />
 	<style>
 
@@ -36,15 +43,24 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
         var strUser = '';
         var valUser = '';
     </script>
-    <script>function alertMessage(containerName)
-        {
-            valUser = containerName.options[containerName.selectedIndex].value;
-            strUser = containerName.options[containerName.selectedIndex].text;
-            var str1 = 'For ';
+    <script>
 
-            document.getElementById('testing').innerHTML = str1.concat(strUser);
-            document.getElementById('button').click();
-        }
+                var bookName;
+                function alertMessage(containerName) {
+                    valUser = containerName.options[containerName.selectedIndex].value;
+                    strUser = containerName.options[containerName.selectedIndex].text;
+                    var str1 = 'For ';
+
+                    document.getElementById('testing').innerHTML = str1.concat(strUser);
+                    if(document.getElementById('book_detail_table'))
+                    document.getElementById('book_detail_table').innerHTML = '';
+                    document.getElementById('button').click();
+                }
+
+                function bookNameSaved(bN) {
+                    bookName = bN;
+                }
+
     </script>
 </head>
 
@@ -56,6 +72,7 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
         <div class="form-group">
         <?php
         $select_field_state = new select_input($global_available_states_list,'State','state',$sql_execute[0]['book_state_id_fk']);
+        echo $select_field_state->create_select_field(true);
 
         echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";
         ?>
@@ -86,9 +103,9 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
                 $do_once = $do_once - $do_once;
                 foreach ($sql_execute as $k => $v) {
                     echo "<a class=\"list-group-item\" href=\"" . $thispage . "?book_id=";
-                    echo $sql_execute[$do_once]['book_id'] . "\">" . $sql_execute[$do_once]['Book Name'];
+                    echo $sql_execute[$do_once]['book_id'] . "&book_name=".$sql_execute[$do_once]['Book Name']."\">" . $sql_execute[$do_once]['Book Name'];
                     echo "</a>";
-                    echo "\n\r";
+                    echo "\r\n";
                     $do_once++;
                 }
             }
@@ -101,7 +118,7 @@ if(isset($_POST['state']) && $_POST['state'] !== '')
             <?php
             if ($_GET['book_id'] !== null)
             {
-                $book_contents = new book_detail($connection_array, '',$_GET['book_id'],$conn,$select_sql);
+                $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
             }
             ?>
         </article>

@@ -18,24 +18,39 @@ class select_input
         $this->label = $label;
         $this->select_name = $select_name;
         $this->selected_item_id = $selected_item_id;
+        $on_change = null;
 
+
+    }
+
+    function create_select_field($on_change)
+    {
+        $return_string = '';
         if($this->label !== '')
-            echo "<label for='".$this->select_name."' class=\"control-label\">$this->label: &nbsp; </label>";
-        echo "<div class=\"form-group\" style='margin-right: 20px;'><select onchange='alertMessage($this->select_name);' class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
-        echo "<option value=\"\">Select ".$this->label."</option>\n\r"; //Need to make this as an initial selected item
+            $return_string .= "<label for='".$this->select_name."' class=\"control-label\">$this->label: &nbsp; </label>";
+
+        $return_string .= "<div class=\"form-group\" style='margin-right: 20px;'><select";
+
+        if ($on_change)
+            $return_string .= " onchange='alertMessage($this->select_name);' "; //ASM need to add this flag to other pages so it works properly
+
+        $return_string .= " class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
+        $return_string .= "<option value=\"\">Select ".$this->label."</option>"; //Need to make this as an initial selected item
         foreach($this->data_array as $arr)
         {
-            echo "<option value=\"".$arr['ID']."\"";
+            $return_string .= "<option value=\"".$arr['ID']."\"";
 
             if($this->selected_item_id == $arr['ID'])
-                echo " selected";
+                $return_string .= " selected";
 
-            echo " >".$arr['data']."</option>";
+            $return_string .= " >".$arr['data']."</option>"."\r\n";
         }
         //echo "</input>";
-        echo "</select></div>";
+        $return_string .= "</select></div>";
         if($this->label !== '')
-           echo "&nbsp";
+            $return_string .= "&nbsp";
+
+        return $return_string;
     }
 }
 ?>

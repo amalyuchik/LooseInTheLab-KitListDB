@@ -21,7 +21,7 @@ class select_sql
         }
         elseif($view == 'book_contents')//to see the contents of a book
         {
-            $query = "SELECT book_lab_line_lab_id_fk AS 'Lab ID',labs.lab_name AS 'Lab Name'
+            $query = "SELECT book_lab_line_lab_id_fk AS 'Lab ID',labs.lab_name AS 'Lab Name', book_lab_line_id AS 'Delete'
                         FROM kitliastdb.book_lab_line
                         LEFT JOIN books ON book_lab_line_book_id_fk = book_id
                         LEFT JOIN labs ON book_lab_line_lab_id_fk = lab_id
@@ -67,6 +67,10 @@ class select_sql
         elseif($view == 'products') //for product categories dropdown
         {
             $query = "SELECT product_id AS 'ID', product_name AS 'data' FROM kitliastdb.products ORDER BY product_name ASC";
+        }
+        elseif($view == 'all_labs') //for product categories dropdown
+        {
+            $query = "SELECT lab_id AS 'ID', lab_name AS 'data' FROM kitliastdb.labs ORDER BY lab_name ASC";
         }
         else
         {
