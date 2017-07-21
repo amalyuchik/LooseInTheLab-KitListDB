@@ -14,7 +14,7 @@ class select_input
 
     function __construct($data_array_ID_data = array('ID','data'), $label, $select_name, $selected_item_id=null)
     {
-        $this->data_array = $data_array_ID_data;
+        $this->data_array_ID_data = $data_array_ID_data;
         $this->label = $label;
         $this->select_name = $select_name;
         $this->selected_item_id = $selected_item_id;
@@ -29,14 +29,15 @@ class select_input
         if($this->label !== '')
             $return_string .= "<label for='".$this->select_name."' class=\"control-label\">$this->label: &nbsp; </label>";
 
-        $return_string .= "<div class=\"form-group\" style='margin-right: 20px;'><select";
+        $return_string .= "<select";
 
         if ($on_change)
             $return_string .= " onchange='alertMessage($this->select_name);' "; //ASM need to add this flag to other pages so it works properly
 
         $return_string .= " class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
         $return_string .= "<option value=\"\">Select ".$this->label."</option>"; //Need to make this as an initial selected item
-        foreach($this->data_array as $arr)
+
+        foreach($this->data_array_ID_data as $arr)
         {
             $return_string .= "<option value=\"".$arr['ID']."\"";
 
@@ -45,12 +46,11 @@ class select_input
 
             $return_string .= " >".$arr['data']."</option>"."\r\n";
         }
-        //echo "</input>";
-        $return_string .= "</select></div>";
+
+        $return_string .= "</select>";//</div>
         if($this->label !== '')
             $return_string .= "&nbsp";
 
         return $return_string;
     }
 }
-?>

@@ -62,7 +62,7 @@ class select_sql
         }
         elseif($view == 'product_categories') //for product categories dropdown
         {
-            $query = "SELECT DISTINCT product_category AS 'data' FROM kitliastdb.products ORDER BY product_category ASC";
+            $query = "SELECT product_category_id AS 'ID', product_category_name AS 'data' FROM kitliastdb.product_categories ORDER BY product_category_name ASC";
         }
         elseif($view == 'products') //for product categories dropdown
         {
