@@ -11,6 +11,7 @@ if(isset($_POST['product_sku']))
         'product_name' => $_POST['product_name'],
         'product_description' => $_POST['product_description'],
         'product_category' => $_POST['product_category'],
+        'product_category_id' => $_POST['product_category_id'],
         'product_cost' => $_POST['product_cost'],
         'product_price' => $_POST['product_price']
     );
@@ -35,6 +36,7 @@ if(isset($product_id))
     $product_name = trim($edit_product_result[0]['product_name']);
     $product_description = trim($edit_product_result[0]['product_description']);
     $product_category = $edit_product_result[0]['product_category'];
+    $product_category_id = $edit_product_result[0]['product_category_id'];
     $product_cost = $edit_product_result[0]['product_cost'];
     $product_price = $edit_product_result[0]['product_price'];
 }
@@ -58,12 +60,14 @@ if(isset($product_id))
 
 </head>
 <body>
+<div class="container">
+    <section>
 <?php
 
 
 ?>
     <h1><?php echo $edit_product_result[0]['product_name']; ?></h1>
-<form action="<?php $thispage ?>" method="post">
+<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
     <label>SKU: &nbsp;</label>
     <input type="text" size="60" name="product_sku" value="<?php echo $product_sku; ?>"><br /><br />
     <?php echo "<input type=\"hidden\" name=\"product_id\" value=".$edit_product_result[0]['product_id'].">"; ?>
@@ -71,7 +75,7 @@ if(isset($product_id))
     <input type="text" size="60" name="product_name" value="<?php echo $product_name; ?>"><br /><br />
     <label>Description: &nbsp;</label>
     <textarea rows="4" cols="59" name="product_description"><?php echo $product_description; ?></textarea><br /><br />
-    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category',$product_category);
+    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
     echo $select_field_categories->create_select_field(false);?>&nbsp;
     <br /><br /><label>Cost: &nbsp;</label>
     <input type="text" size="60" name="product_cost" value="<?php echo $product_cost; ?>"><br /><br />
@@ -79,5 +83,13 @@ if(isset($product_id))
     <input type="text" size="60" name="product_price" value="<?php echo $product_price; ?>"><br /><br />
     <input type="submit" value="Submit">
 </form>
+
+    </section>
+<?php $navigation = new site_nav(); ?>
+
+<footer>
+    <p>Copyright 2017 ASM</p>
+</footer>
+</div>
 </body>
 </html>

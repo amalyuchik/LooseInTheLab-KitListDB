@@ -9,6 +9,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_names_left_menu.php");
 $conn = new connections();
 $select_sql = new select_sql();
 $book_name = '';
@@ -60,72 +61,60 @@ if(isset($_GET['delete']))
                 function bookNameSaved(bN) {
                     bookName = bN;
                 }
-
     </script>
 </head>
 
 <body>
 <div class="container">
-<div class="row">
 <section>
-    <form class="form-horizontal" action="<?php $thispage ?>" method="post">
         <div class="form-group">
-        <?php
-        $select_field_state = new select_input($global_available_states_list,'State','state',$sql_execute[0]['book_state_id_fk']);
-        echo $select_field_state->create_select_field(true);
+            <form class="form-horizontal" action="<?php $thispage ?>" method="post">
+                <?php
+                $select_field_state = new select_input($global_available_states_list,'State','state',$sql_execute[0]['book_state_id_fk']);
+                echo $select_field_state->create_select_field(true);
 
-        echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";
-        ?>
+                echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";
+                ?>
 
+            </form>
         </div>
-    </form>
     <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-5">
-        <header>
-            <strong>Available Books <span id="testing"></span></strong>
-        </header>
+        <div class="col-lg-3 col-md-4 col-sm-5">
+            <header>
+                <strong>Available Books <span id="testing"></span></strong>
+            </header>
             <div class="list-group table-of-contents">
 
             <?php
             if($sql_execute !== null)
             {
-                //echo "<table style='border: solid 0px black;margin-bottom: 20px;'>";
-    //                    echo "<tr> ";
-    //                    foreach ($sql_execute[0] as $k => $v) {
-    //                        if ($do_once < count($sql_execute[0]))
-    //                            echo "<th class=\"table_header\">" . $k . "</th>";
-    //                        else
-    //                            continue;
-    //
-    //                        $do_once++;
-    //                    }
-    //                    echo "</tr>";
-                $do_once = $do_once - $do_once;
-                foreach ($sql_execute as $k => $v) {
-                    echo "<a class=\"list-group-item\" href=\"" . $thispage . "?book_id=";
-                    echo $sql_execute[$do_once]['book_id'] . "&book_name=".$sql_execute[$do_once]['Book Name']."\">" . $sql_execute[$do_once]['Book Name'];
-                    echo "</a>";
-                    echo "\r\n";
-                    $do_once++;
-                }
+                $book_menu = new book_names_left_menu($sql_execute);
+                echo $book_menu->generate_book_name_menu();
+//                $do_once = $do_once - $do_once;
+//                foreach ($sql_execute as $k => $v) {
+//                    echo "<a class=\"list-group-item\" href=\"" . $thispage . "?book_id=";
+//                    echo $sql_execute[$do_once]['book_id'] . "&book_name=".$sql_execute[$do_once]['Book Name']."\">" . $sql_execute[$do_once]['Book Name'];
+//                    echo "</a>";
+//                    echo "\r\n";
+//                    $do_once++;
+                //}
             }
             ?>
             </div>
         </div>
-    <div class="col-lg-9 col-md-8 col-sm-7">
+        <div class="col-lg-9 col-md-8 col-sm-7">
 
-        <article>
-            <?php
-            if ($_GET['book_id'] !== null)
-            {
-                $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
-            }
-            ?>
-        </article>
-    </div>
+            <article>
+                <?php
+                if ($_GET['book_id'] !== null)
+                {
+                    $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
+                }
+                ?>
+            </article>
+        </div>
     </div>
 </section>
-</div>
 
 		<?php $navigation = new site_nav(); ?>
 
