@@ -78,8 +78,9 @@ if(isset($lab_id))
 <html>
 <head>
     <META NAME="ROBOTS" CONTENT="NONE">
-    <?php echo $bootstrapLink; ?>
-    <?php echo $fontAwesomeLink; ?>
+    <?php echo $bootstrapLink; echo "\r\n";?>
+    <?php echo $fontAwesomeLink; echo "\r\n"; ?>
+    <?php echo $jQueryLink; echo "\r\n"; ?>
     <link rel="stylesheet" href="css/nav_style.css" />
 <style>
     td{
@@ -114,7 +115,7 @@ if(isset($lab_id))
     <input type="submit"  value="Save" >
 </form><br /><br />
 <form  action="<?php $thispage ?>" method="post" name="product">
-<table style="table-layout: auto; width: 100%;">
+<table style="table-layout: inherit; width: 100%;">
 
 
     <?php
@@ -136,42 +137,43 @@ if(isset($lab_id))
 
         foreach($lab_line_products_result as $k=>$v)
         {
-            echo "<tr>";
+            $recId = $v['lab_product_line_id'];
+            echo "<tr id=\"row".$recId."\">";
             echo "<td><p style='width: 200px;'>";
             echo "<a href=\"".$base_url."kit_db/product_edit.php?product_id=";
             echo $v['lab_product_line_product_id_fk']."\">".$v['product_name']."</a>";
             echo "</p></td>";
 
-            echo "<td><p>";
+            echo "<td><p style='width: 75px;'>";
             echo $v['lab_product_line_product_category'];
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"hidden\" name=\"product_id".$k."\" value=".$v['lab_product_line_product_id_fk']."><input type=\"hidden\" name=\"lab_id".$k."\" value=".$lab_id."><input type=\"text\" size=\"5\" name=\"classroom_qty".$k."\" maxlength=\"255\" value=". $v['lab_product_line_classroom_qty'] .">";
+            echo "<input type=\"hidden\" id=\"product_line_id".$recId."\" name=\"product_line_id".$recId."\" value=".$v['lab_product_line_id']."><input type=\"hidden\" id=\"product_id".$recId."\" name=\"product_id".$recId."\" value=".$v['lab_product_line_product_id_fk']."><input type=\"hidden\" id=\"lab_id".$recId."\" name=\"lab_id".$recId."\" value=".$lab_id."><input type=\"text\" size=\"5\" onchange=\"onrowchange(classroom_qty".$recId.");\" id=\"classroom_qty".$recId."\" name=\"classroom_qty".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_classroom_qty'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"5\" name=\"refill_qty".$k."\" maxlength=\"255\" value=". $v['lab_product_line_refill_qty'] .">";
+            echo "<input type=\"text\" size=\"5\" onchange=\"onrowchange(refill_qty".$recId.");\" id=\"refill_qty".$recId."\" name=\"refill_qty".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_refill_qty'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"25\" name=\"refill_qty_detail".$k."\" maxlength=\"255\" value=". $v['lab_product_line_refill_qty_detail'] .">";
+            echo "<input type=\"text\" size=\"12\" onchange=\"onrowchange(refill_qty_detail".$recId.");\" id=\"refill_qty_detail".$recId."\" name=\"refill_qty_detail".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_refill_qty_detail'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"5\" name=\"participant_qty".$k."\" maxlength=\"255\" value=". $v['lab_product_line_participant_qty'] .">";
+            echo "<input type=\"text\" size=\"5\" onchange=\"onrowchange(participant_qty".$recId.");\" id=\"participant_qty".$recId."\" name=\"participant_qty".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_participant_qty'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"5\" name=\"presenter_qty".$k."\" maxlength=\"255\" value=". $v['lab_product_line_presenter_qty'] .">";
+            echo "<input type=\"text\" size=\"5\" onchange=\"onrowchange(presenter_qty".$recId.");\" id=\"presenter_qty".$recId."\" name=\"presenter_qty".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_presenter_qty'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"5\" name=\"retail_qty".$k."\" maxlength=\"255\" value=". $v['lab_product_line_retail_qty'] .">";
+            echo "<input type=\"text\" size=\"5\" onchange=\"onrowchange(retail_qty".$recId.");\" id=\"retail_qty".$recId."\" name=\"retail_qty".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_retail_qty'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
-            echo "<input type=\"text\" size=\"25\" name=\"retail_qty_detail".$k."\" maxlength=\"255\" value=". $v['lab_product_line_retail_qty_detail'] .">";
+            echo "<input type=\"text\" size=\"12\" onchange=\"onrowchange(retail_qty_detail".$recId.");\" id=\"retail_qty_detail".$recId."\" name=\"retail_qty_detail".$recId."\" maxlength=\"255\" value=". $v['lab_product_line_retail_qty_detail'] .">";
             echo "</p></td>";
 
             echo "<td><p>";
@@ -185,9 +187,10 @@ if(isset($lab_id))
             echo $v['product_price'];
             echo "</p></td>";
 
-            echo "<td><p style=\"padding-right:10px;\">";
+            echo "<td><p style=\"padding-right:0px;\">";
             //echo "<input type=\"submit\"  value=\"Save\" >";
             //echo "<a href=\"". $thispage . "?lab_id=".$lab_id."&product_id=".$v['lab_product_line_product_id_fk']."\" ><i style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
+            echo "<a href=\"#\" onclick=\"post(".$recId.");\" ><i style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
             echo "&nbsp;<a href=\"". $thispage . "?lab_id=".$lab_id."&record_id=".$v['lab_product_line_id']."&delete=1\" ><i style=\"color: red;\" class=\"fa fa-trash-o\" aria-hidden=\"true\"></i></a>"; //
             echo "</p></td>";
 
@@ -204,6 +207,8 @@ if(isset($lab_id))
         echo "<tr><td><strong>No Products in this lab.</strong></td></tr>";
     if($add_row == null)
         echo "<tr class='blank_white_row'><td><a style=\"color: red;font-weight: bold; font-size: 15px;\" href=\"$thispage?lab_id=$lab_id&add_product=1\">Add Product</a></td></tr>";
+
+
     ?>
 </table>
 </form>
@@ -217,7 +222,55 @@ if(isset($lab_id))
     </footer>
 </div>
 <script type="text/javascript">
-    document.getElementById('testing').innerHTML = strUser;
+//    if(strUser)
+//    document.getElementById('testing').innerHTML = strUser;
+
+    function post(v)
+    {
+        var cq = '#'.concat('classroom_qty',v);
+        var refq = '#'.concat('refill_qty',v);
+        var refqd = '#'.concat('refill_qty_detail',v);
+        var paq = '#'.concat('participant_qty',v);
+        var prq = '#'.concat('presenter_qty',v);
+        var retq = '#'.concat('retail_qty',v);
+        var retqd = '#'.concat('retail_qty_detail',v);
+        var rowID = '#'.concat('row',v);
+        var className = ".editedElement";
+
+        var classroom_qty = $(cq).val();
+        var refill_qty = $(refq).val();
+        var refill_qty_detail = $(refqd).val();
+        var participant_qty = $(paq).val();
+        var presenter_qty = $(prq).val();
+        var retail_qty = $(retq).val();
+        var retail_qty_detail = $(retqd).val();
+        var activerow = $(rowID).val();
+
+
+
+        //alert(classroom_qty);
+
+        $.post('includes/validate.php', {postclassroom_qty:classroom_qty,postrefill_qty:refill_qty},
+        function(data)
+        {
+            $('#result').html(data);
+            //alert(data);
+        });
+
+        var unchangeElementsofRow = $(rowID).find(className);
+
+        //for(i=0; i<unchangeElementsofRow.length; i++) {
+          var restoreElement = unchangeElementsofRow.removeClass("editedElement");
+        //}
+    }
+    function onrowchange(v)
+    {
+        var elementID = '#'.concat(v.id);
+
+        var $changedElement = $(elementID); // Save reference for better performance
+        var backgroundInterval = $changedElement.addClass("editedElement");
+
+    }
 </script>
 </body>
 </body>
