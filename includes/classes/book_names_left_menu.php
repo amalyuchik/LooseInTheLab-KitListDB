@@ -29,8 +29,8 @@ class book_names_left_menu
         $this->iteration = $this->iteration - $this->iteration;
         foreach ($this->sql_execute as $k => $v)
         {
-            $book_menu_string .= "<a class=\"list-group-item\" href=\"" . $_SERVER['PHP_SELF'] . "?book_id=";
-            $book_menu_string .= $this->sql_execute[$this->iteration]['book_id'] . "&book_name=".$this->sql_execute[$this->iteration]['Book Name']."\">" . $this->sql_execute[$this->iteration]['Book Name'];
+            $book_menu_string .= "<a class=\"list-group-item\" href=\"#\" onclick=\"postBook(";//" . $_SERVER['PHP_SELF'] . "?book_id=
+            $book_menu_string .= $this->sql_execute[$this->iteration]['book_id'] .")\">" . $this->sql_execute[$this->iteration]['Book Name'];
             $book_menu_string .= "</a>";
             $book_menu_string .= "\r\n";
             $this->iteration++;

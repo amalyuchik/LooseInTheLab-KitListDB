@@ -35,6 +35,13 @@ class select_sql
             $query = "SELECT DISTINCT books.book_state_id_fk AS 'ID', states.state_name AS 'State Name', states.state_abbreviation AS 'data' FROM books
                       INNER JOIN states on state_id = book_state_id_fk ORDER BY states.state_abbreviation";
         }
+        elseif($view == 'book_name') //for book name in Book Detail
+        {
+            $query = "SELECT concat(states.state_abbreviation, ' ',grades.grade_grade,' ',books.book_notes) AS 'Book Name' FROM kitliastdb.books
+                        LEFT JOIN states ON  book_state_id_fk = states.state_id
+                        LEFT JOIN grades ON book_grade_id_fk = grades.grade_id
+                        WHERE book_id = ".$book_id;
+        }
         elseif($view == 'state_list') //for states dropdown
         {
             $query = "SELECT states.state_id AS 'ID',states.state_name AS 'State Name', states.state_abbreviation AS 'data' FROM states ORDER BY states.state_abbreviation";

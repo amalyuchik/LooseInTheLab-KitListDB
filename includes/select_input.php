@@ -32,7 +32,7 @@ class select_input
         $return_string .= "<select";
 
         if ($on_change)
-            $return_string .= " onchange='alertMessage($this->select_name);' "; //ASM need to add this flag to other pages so it works properly
+            $return_string .= " onchange='selected($this->selected_item_id);' "; //ASM need to add this flag to other pages so it works properly
 
         $return_string .= " class=\"form-control\" id=\"$this->select_name\" name=\"$this->select_name\" style=\"max-width: 200px;\">";
         $return_string .= "<option value=\"\">Select ".$this->label."</option>"; //Need to make this as an initial selected item

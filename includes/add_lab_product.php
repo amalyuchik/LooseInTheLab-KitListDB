@@ -37,7 +37,7 @@ class add_lab_product
         echo "</p></td>";
 
         echo "<td><p>";
-        echo "<input type=\"text\" size=\"25\" name=\"refill_qty_detail_product_add\" maxlength=\"255\" value=\"\">";
+        echo "<input type=\"text\" size=\"12\" name=\"refill_qty_detail_product_add\" maxlength=\"255\" value=\"\">";
         echo "</p></td>";
 
         echo "<td><p>";
@@ -53,7 +53,7 @@ class add_lab_product
         echo "</p></td>";
 
         echo "<td><p>";
-        echo "<input type=\"text\" size=\"25\" name=\"retail_qty_detail_product_add\" maxlength=\"255\" value=\"\">";
+        echo "<input type=\"text\" size=\"12\" name=\"retail_qty_detail_product_add\" maxlength=\"255\" value=\"\">";
         echo "</p></td>";
 
         echo "<td align=\"center\"><p style=\"margin-left: -10px;\">";

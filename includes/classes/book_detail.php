@@ -19,6 +19,7 @@ class book_detail
     var $select_sql;
     var $global_lab_names_list = array();
     var $book_detail_html_string = '';
+    var $do_once = 0;
 
     /**
      * book_detail constructor.
@@ -39,8 +40,6 @@ class book_detail
         $this->global_lab_names_list = $global_lab_names_list;
         $this->base_url = $base_url = "http://www.seriouslyfunnyscience.com/";
 //        $base_url = "http://www.seriouslyfunnyscience.com/";
-        $thispage = $_SERVER['PHP_SELF'];
-        $do_once = 0;
         echo $this->retrieve_book($this->book_id,$this->global_lab_names_list);
     }
 
@@ -49,10 +48,13 @@ class book_detail
     {
         $query_select = $this->select_sql->query("book_contents", null, null, $bk_id);
         $sql_execute = $this->conn->runconn_sql_execute($this->connection_array, $query_select);
+
+        $book_name_select = $this->select_sql->query("book_name", null, null, $bk_id);
+        $book_name_sql_execute = $this->conn->runconn_sql_execute($this->connection_array,$book_name_select);
   //      var $do_once=0;
         if($sql_execute !== null)
         {
-            $this->book_detail_html_string .= "<header><h1>Test</h1></header>";
+            $this->book_detail_html_string .= "<header><h1>".$book_name_sql_execute[0]['Book Name']."</h1></header>";
             $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
 
 
@@ -72,16 +74,12 @@ class book_detail
             $this->book_detail_html_string .=  "</tr>";
             $do_once = $do_once-$do_once;
 
-            if(isset($_GET['add_lab']))
-            {
-                $add_row = new add_lab_to_book($global_lab_names_list,$this->book_id);
-                $this->book_detail_html_string .= $add_row->return_value_string($global_lab_names_list,'', $_SERVER['PHP_SELF']);
-            }
-            else
-                $add_row = null;
-            if($add_row == null)
-                $this->book_detail_html_string .= "<tr class='blank_white_row' style='border-bottom:1px solid grey;'><td><a style=\"color: red;font-weight: bold; font-size: 15px;\" href=\"$thispage?book_id=$this->book_id&add_lab=1\">Add a Lab</a></td><td></td><td></td></tr>";
+            $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
 
+
+                $this->book_detail_html_string .= "<td><a style=\"color: red;font-weight: bold; font-size: 15px;\" onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
+
+            $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
             foreach($sql_execute as $k=>$v)
             {
                 $this->book_detail_html_string .=  "<tr><td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;text-align: center;\">";

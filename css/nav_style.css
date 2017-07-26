@@ -44,8 +44,8 @@ label{
     padding: 10px 0px 10px 10px;
     background-color: white;
 }
-#row290{
-
+.add_lab_to_book td{
+    background-color: lemonchiffon;
 }
 .editedElement{
     background-color: #FFFF9C;

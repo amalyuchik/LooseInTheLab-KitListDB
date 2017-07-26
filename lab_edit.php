@@ -13,7 +13,7 @@ $product_id=$_GET['product_id'];
  */
 $d=date('Y-m-d H:i:s');
 
-if(isset($_POST['product_id']))
+if(isset($_POST['product_id'])) //ASM This adds a new product to the lab
 {
     $add_product_conn = new connections();
     $select_sql = new select_sql();
@@ -187,11 +187,11 @@ if(isset($lab_id))
             echo $v['product_price'];
             echo "</p></td>";
 
-            echo "<td><p style=\"padding-right:0px;\">";
+            echo "<td><p style=\"width: 50px;padding-right:0px;\">";
             //echo "<input type=\"submit\"  value=\"Save\" >";
             //echo "<a href=\"". $thispage . "?lab_id=".$lab_id."&product_id=".$v['lab_product_line_product_id_fk']."\" ><i style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
-            echo "<a href=\"#\" onclick=\"post(".$recId.");\" ><i style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
-            echo "&nbsp;<a href=\"". $thispage . "?lab_id=".$lab_id."&record_id=".$v['lab_product_line_id']."&delete=1\" ><i style=\"color: red;\" class=\"fa fa-trash-o\" aria-hidden=\"true\"></i></a>"; //
+            echo "<a href=\"#\" onclick=\"post(".$recId.");\" ><i id=\"save".$recId."\" style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
+            echo "&nbsp;&nbsp;&nbsp;<a href=\"". $thispage . "?lab_id=".$lab_id."&record_id=".$v['lab_product_line_id']."&delete=1\" ><i style=\"color: red;\" class=\"fa fa-trash-o\" aria-hidden=\"true\"></i></a>"; //
             echo "</p></td>";
 
             echo "</tr>";
@@ -211,6 +211,7 @@ if(isset($lab_id))
 
     ?>
 </table>
+    <div id="result"></div>
 </form>
         </section>
     </div>
@@ -246,11 +247,9 @@ if(isset($lab_id))
         var retail_qty_detail = $(retqd).val();
         var activerow = $(rowID).val();
 
-
-
         //alert(classroom_qty);
 
-        $.post('includes/validate.php', {postclassroom_qty:classroom_qty,postrefill_qty:refill_qty},
+        $.post('includes/post/post_save_lab_product_line.php', {post_lab_product_line_id:v,post_classroom_qty:classroom_qty,post_refill_qty:refill_qty,post_refill_qty_detail:refill_qty_detail,post_participant_qty:participant_qty,post_presenter_qty:presenter_qty,post_retail_qty:retail_qty,post_retail_qty_detail:retail_qty_detail},
         function(data)
         {
             $('#result').html(data);
@@ -258,10 +257,7 @@ if(isset($lab_id))
         });
 
         var unchangeElementsofRow = $(rowID).find(className);
-
-        //for(i=0; i<unchangeElementsofRow.length; i++) {
-          var restoreElement = unchangeElementsofRow.removeClass("editedElement");
-        //}
+        var restoreElement = unchangeElementsofRow.removeClass("editedElement");
     }
     function onrowchange(v)
     {
@@ -269,6 +265,8 @@ if(isset($lab_id))
 
         var $changedElement = $(elementID); // Save reference for better performance
         var backgroundInterval = $changedElement.addClass("editedElement");
+
+        //var $showSaveButton =
 
     }
 </script>

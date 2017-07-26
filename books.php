@@ -45,21 +45,11 @@ if(isset($_GET['delete']))
         var valUser = '';
     </script>
     <script>
-
-                var bookName;
-                function alertMessage(containerName) {
-                    valUser = containerName.options[containerName.selectedIndex].value;
-                    strUser = containerName.options[containerName.selectedIndex].text;
-                    var str1 = 'For ';
-
-                    document.getElementById('testing').innerHTML = str1.concat(strUser);
+                function selected()
+                {
                     if(document.getElementById('book_detail_table'))
                     document.getElementById('book_detail_table').innerHTML = '';
                     document.getElementById('button').click();
-                }
-
-                function bookNameSaved(bN) {
-                    bookName = bN;
                 }
     </script>
 </head>
@@ -81,7 +71,7 @@ if(isset($_GET['delete']))
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-5">
             <header>
-                <strong>Available Books <span id="testing"></span></strong>
+                <strong>Available Books</strong>
             </header>
             <div class="list-group table-of-contents">
 
@@ -105,11 +95,12 @@ if(isset($_GET['delete']))
         <div class="col-lg-9 col-md-8 col-sm-7">
 
             <article>
+                <div id="book_detail_result"></div> <!--Result of the Book_detail displays here-->
                 <?php
-                if ($_GET['book_id'] !== null)
-                {
-                    $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
-                }
+//                if ($_GET['book_id'] !== null)
+//                {
+//                    $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
+//                }
                 ?>
             </article>
         </div>
@@ -123,7 +114,36 @@ if(isset($_GET['delete']))
 	</footer>
 </div>
 <script type="text/javascript">
-    document.getElementById('testing').innerHTML = strUser;
+    //    if(strUser)
+    //    document.getElementById('testing').innerHTML = strUser;
+
+    function postBook(v)
+    {
+        $.post('includes/post/post_book_detail_processor.php', {post_book_id:v},
+            function(data)
+            {
+                $('#book_detail_result').html(data);
+                //alert(data);
+            });
+    }
+
+    function addLabToBook(book_id)
+    {
+        if($('#insert_lab_row').html().length > 100) {
+            $('#insert_lab_row').html('');
+        }
+        else {
+            $.post('includes/validate.php', {post_book_id: book_id},
+                function (data) {
+                    $('#insert_lab_row').html(data);
+                });
+        }
+    }
+    function closeAddLabRow()
+    {
+        if($('#insert_lab_row').html().length > 100)
+            $('#insert_lab_row').html('');
+    }
 </script>
 </body>
 
