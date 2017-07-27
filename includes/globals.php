@@ -18,6 +18,7 @@ $db_n = 'kitliastdb';
 $db_n_schema = 'information_schema';
 $state_submit = $_POST['state'];
 $grade_submit = $_POST['grade'];
+$current_date = date("Y-m-d H:i:s");
 
 $base_url = "http://www.seriouslyfunnyscience.com/";
 

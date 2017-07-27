@@ -158,7 +158,7 @@ class connections
 					if($i == 0)
 					{
 						$record_field_id_value = $field_values_array[$record_field_id]; //Record ID value for the where clause
-
+                        //echo $record_field_id_value;
 						//Loop through the values array to create the IN statement
 						if(count($record_field_id_value) > 1)
 						{
@@ -175,7 +175,7 @@ class connections
 						}
 						else //If there's only one member in the value array, present it
 						{
-							$query = "DELETE FROM $tables_array[0] WHERE " . $record_field_id . "=" . $record_field_id_value[0];
+							$query = "DELETE FROM $tables_array[0] WHERE " . $record_field_id . "=" . $record_field_id_value;
 						}
 					}
 					else

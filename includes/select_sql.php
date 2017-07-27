@@ -27,7 +27,7 @@ class select_sql
                         LEFT JOIN labs ON book_lab_line_lab_id_fk = lab_id
                         LEFT JOIN states ON  book_state_id_fk = states.state_id
                         LEFT JOIN grades ON book_grade_id_fk = grades.grade_id
-                        WHERE book_id = ".$book_id."
+                        WHERE book_lab_line_book_id_fk = ".$book_id."
                         ORDER BY book_lab_line_id";
         }
         elseif($view == 'available_state_list') //for book states dropdown

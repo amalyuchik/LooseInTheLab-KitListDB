@@ -6,18 +6,21 @@
  * Time: 2:32 PM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/add_lab_to_book.php");
 
 if ($conn == null)
 {
     $conn = new connections();
 }
-$post_book_id = stripslashes($_POST['post_book_id']);
-if ($post_book_id !== null)
+$post_record_id = stripslashes($_POST['post_record_id']);
+$f_v_array = array('book_lab_line_id'=>$post_record_id);
+$table_array = array('book_lab_line');
+
+if ($post_record_id !== null)
 {
-    $add_lab_to_book_contents = new add_lab_to_book($global_lab_names_list,$post_book_id);
-    echo $add_lab_to_book_row = $add_lab_to_book_contents->return_value_string('');
+    $query = $conn->query_construct("delete",$table_array,$f_v_array);
+    //echo $query;
+    $sql_execute = $conn->runconn_sql_execute($connection_array,$query);
 }
 else
-    echo $error_msg = "Book Id was not provided";
+    echo $error_msg = "Record Id was not provided";
 

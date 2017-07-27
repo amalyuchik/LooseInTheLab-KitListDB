@@ -88,15 +88,12 @@ class book_detail
                 $this->book_detail_html_string .=  "</td><td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;min-width: 300px;\">";
                 $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/lab_edit.php?lab_id=".$sql_execute[$do_once]['Lab ID']."\">".$sql_execute[$do_once]['Lab Name']."</a>";
                 $this->book_detail_html_string .=  "</td>";
-                $this->book_detail_html_string .=  "<td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;\"><p style=\"padding - right:10px;min-width:30px;text-align:center;\">&nbsp;<a href=\"". $thispage . "?book_id=".$this->book_id."&record_id=".$sql_execute[$do_once]['X']."&delete=1\" ><i style = \"color: red;\" class=\"fa fa-trash-o\" aria - hidden = \"true\" ></i ></a ></p></td></tr>"."\r\n";
+                $this->book_detail_html_string .=  "<td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;\"><p style=\"padding - right:10px;min-width:30px;text-align:center;\">&nbsp;<a href=\"#\" onclick='deleteLabFromBook(".$sql_execute[$do_once]['Delete'].",". $this->book_id .");' ><i style = \"color: red;\" class=\"fa fa-trash-o\" aria - hidden = \"true\" ></i ></a ></p></td></tr>"."\r\n";
 
                 $do_once++;
             }
             $this->book_name = $sql_execute[$do_once]['Book Name'];
-//            foreach (new TableRows(new RecursiveArrayIterator($sql_execute)) as $k => $v)
-//            {
-//                echo $v;
-//            }
+
             $this->book_detail_html_string .=  "</table>";
         }
 
