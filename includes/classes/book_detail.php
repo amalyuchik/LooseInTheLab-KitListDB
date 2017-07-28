@@ -92,7 +92,6 @@ class book_detail
 
                 $do_once++;
             }
-            $this->book_name = $sql_execute[$do_once]['Book Name'];
 
             $this->book_detail_html_string .=  "</table>";
         }

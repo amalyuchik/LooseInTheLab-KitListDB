@@ -12,7 +12,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 if (isset($_POST['product_category_id']) && $_POST['product_category_id'] !== null)
 {
     $conn = new connections();
-    $query = "UPDATE kitliastdb.products SET product_category_id = " . $_POST['product_category_id'] . " WHERE product_category = '" . $_POST['product_category_name'] . "'";
+    $query = "UPDATE kitliastdb.products SET product_category_id_fk = " . $_POST['product_category_id'] . " WHERE product_category = '" . $_POST['product_category_name'] . "'";
     echo $query;
     $query_execute = $conn->runconn_sql_execute($connection_array,$query);
 }
