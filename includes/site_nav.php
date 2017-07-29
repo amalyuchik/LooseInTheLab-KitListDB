@@ -17,6 +17,7 @@ class site_nav
 		echo '<ul class="nav navbar-nav" style="display:inline-block;">';
 		   echo '<li class="nav-item"><a class="nav-link" href="/kit_db/">Home</a></li>';
 		   echo '<li class="nav-item"><a class="nav-link" href="/kit_db/books.php">Books</a></li>';
+		   echo '<li class="nav-item"><a class="nav-link" href="http://www.seriouslyfunnyscience.com/workshops/">Workshops</a></li>';
 		   echo '<li class="nav-item"><a class="nav-link disabled" href="/contact">Contact us</a></li>';
 		echo '</ul>';
 		echo '</nav></div></div>';

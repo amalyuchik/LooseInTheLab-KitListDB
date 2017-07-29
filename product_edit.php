@@ -36,7 +36,7 @@ if(isset($product_id))
     $product_name = trim($edit_product_result[0]['product_name']);
     $product_description = trim($edit_product_result[0]['product_description']);
     $product_category = $edit_product_result[0]['product_category'];
-    $product_category_id = $edit_product_result[0]['product_category_id'];
+    $product_category_id_fk = $edit_product_result[0]['product_category_id_fk'];
     $product_cost = $edit_product_result[0]['product_cost'];
     $product_price = $edit_product_result[0]['product_price'];
 }
@@ -75,7 +75,7 @@ if(isset($product_id))
     <input type="text" size="60" name="product_name" value="<?php echo $product_name; ?>"><br /><br />
     <label>Description: &nbsp;</label>
     <textarea rows="4" cols="59" name="product_description"><?php echo $product_description; ?></textarea><br /><br />
-    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
+    <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id_fk);
     echo $select_field_categories->create_select_field(false);?>&nbsp;
     <br /><br /><label>Cost: &nbsp;</label>
     <input type="text" size="60" name="product_cost" value="<?php echo $product_cost; ?>"><br /><br />
