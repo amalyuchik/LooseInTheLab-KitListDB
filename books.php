@@ -10,8 +10,12 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_names_left_menu.php");
+
+if(!$conn)
 $conn = new connections();
+if (!$select_sql)
 $select_sql = new select_sql();
+
 $book_name = '';
 if(isset($_POST['state']) && $_POST['state'] !== '')
 {
@@ -40,10 +44,6 @@ if(isset($_GET['delete']))
 
 	</style>
 	<title>Books</title>
-    <script type="text/javascript">
-        var strUser = '';
-        var valUser = '';
-    </script>
     <script>
                 function selected()
                 {
