@@ -6,7 +6,7 @@
  * Time: 10:44 PM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/connections.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
 
 //function	sql_pconnect($db_type, $db_name='', $user_logged_in, $options=null)
 function	sql_pconnect($user_logged_in, $options=null)

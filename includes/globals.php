@@ -5,8 +5,9 @@
  * Date: 4/4/17
  * Time: 10:35 PM
  */
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/connections.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/select_sql.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/select_sql.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/lab_edit_data_object.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/site_nav.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/select_input.php");

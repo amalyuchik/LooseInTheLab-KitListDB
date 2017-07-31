@@ -7,7 +7,7 @@
  */
 
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
+//require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 ?>
 <!DOCTYPE HTML>
 
@@ -27,9 +27,14 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
     <script>
         function selected()
         {
-            if(document.getElementById('book_detail_table'))
-                document.getElementById('book_detail_table').innerHTML = '';
-            document.getElementById('button').click();
+            var e = document.getElementById("product_category_id");
+            var selectedProdCat = e.options[e.selectedIndex].value;
+            //alert('Hello! I got chosen!')
+            //document.getElementById('submit').click();
+            $.get("includes/validate.php?id=".concat(selectedProdCat), function(data){
+                alert(data);
+//                $('#product_list_result').html(data);
+            });
         }
     </script>
 <script>
@@ -43,10 +48,21 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
             <header>
                 <strong>Choose product </strong>
             </header>
-        <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
-        echo $select_field_categories->create_select_field(false);
-        echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";?>&nbsp;
+            <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
+            echo $select_field_categories->create_select_field(true);
+            echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"submit\" type=\"submit\" value=\"Submit\"></div>";?>&nbsp;
 
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-7">
+            <article>
+                <div id="product_list_result"></div> <!--Result of the product_list displays here-->
+                <?php
+                //                if ($_GET['book_id'] !== null)
+                //                {
+                //                    $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
+                //                }
+                ?>
+            </article>
         </div>
     </section>
     <?php $navigation = new site_nav(); ?>

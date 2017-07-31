@@ -87,15 +87,18 @@ class connections
 			{
 
 
+            //I need to go into select_sql and rewrite all the read queries to work here
+
+            if (count($field_values_array) == 1)
+            {
+                foreach ($field_values_array as $k => $v)
+                    $where_clause = "WHERE " . $k . " = " . $v;
+            }
 
 
 
 
-
-
-
-
-				$query = "SELECT * FROM $tables_array[0] "; //WHERE product_sku != ''"
+				$query = "SELECT * FROM $tables_array[0] " . $where_clause; //WHERE product_sku != ''"
 
 
 
