@@ -23,7 +23,15 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 <style>
 
 </style>
-<title>Books</title>
+<title>Product List</title>
+    <script>
+        function selected()
+        {
+            if(document.getElementById('book_detail_table'))
+                document.getElementById('book_detail_table').innerHTML = '';
+            document.getElementById('button').click();
+        }
+    </script>
 <script>
 </script>
 </head>
@@ -36,7 +44,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
                 <strong>Choose product </strong>
             </header>
         <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
-        echo $select_field_categories->create_select_field(false);?>&nbsp;
+        echo $select_field_categories->create_select_field(false);
+        echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";?>&nbsp;
 
         </div>
     </section>
