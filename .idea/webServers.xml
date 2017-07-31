@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="70a3a1be-7415-4a76-a022-f2fc03c8cc91" name="SeriouslyFunnyScience">
+      <webServer id="70a3a1be-7415-4a76-a022-f2fc03c8cc91" name="SeriouslyFunnyScience" url="http://www.seriouslyfunnyscience.com/kit_db">
         <fileTransfer host="www.seriouslyfunnyscience.com" port="21" accessType="FTPS">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
