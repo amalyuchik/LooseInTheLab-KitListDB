@@ -162,7 +162,7 @@ if(isset($_GET['delete']))
         //alert(''.concat(record_id, " deleting ",book_id));
         var r = confirm('Are you sure you want to delete this record?');
         if(r==true) {
-            $.post('includes/validate.php', {post_record_id: record_id},
+            $.post('includes/post/post_delete_lab_from_book_processor.php', {post_record_id: record_id},
                 function (data) {
                     $('#testing').html(data);
                     //alert(data);
