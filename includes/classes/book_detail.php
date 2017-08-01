@@ -6,7 +6,6 @@
  * Time: 10:38 AM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/add_lab_to_book.php");
 

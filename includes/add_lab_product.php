@@ -12,7 +12,7 @@ class add_lab_product
 
     function __construct($global_product_names_list, $lab_id)
     {
-        //require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/select_input.php");
+        //require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/form_element_classes/select_input.php");
         $this->global_product_names_list = $global_product_names_list;
         $this->lab_id = $lab_id;
         $base_url = "http://www.seriouslyfunnyscience.com/";

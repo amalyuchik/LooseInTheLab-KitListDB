@@ -6,7 +6,7 @@
  * Time: 12:44 AM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
+//require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/sql_functions.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_names_left_menu.php");

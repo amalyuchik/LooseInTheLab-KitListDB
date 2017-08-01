@@ -19,3 +19,5 @@ if ($post_book_id !== null)
 else
     echo $error_msg = "Book Id was not provided";
 
+$conn = null;
+

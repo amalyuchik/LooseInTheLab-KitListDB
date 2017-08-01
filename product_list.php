@@ -29,12 +29,14 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
         {
             var e = document.getElementById("product_category_id");
             var selectedProdCat = e.options[e.selectedIndex].value;
-            //alert('Hello! I got chosen!')
-            //document.getElementById('submit').click();
-            $.get("includes/validate.php?id=".concat(selectedProdCat), function(data){
-                alert(data);
-//                $('#product_list_result').html(data);
-            });
+            var selectedProdName = e.options[e.selectedIndex].text;
+            if(selectedProdCat !== '')
+            {
+                $.get("includes/validate.php?id=".concat(selectedProdCat, "&category_name=", selectedProdName), function (data) {
+                    //alert(data);
+                    $('#product_list_result').html(data);
+                });
+            }
         }
     </script>
 <script>

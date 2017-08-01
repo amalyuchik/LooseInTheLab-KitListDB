@@ -8,9 +8,9 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/select_sql.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/sql_functions.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/lab_edit_data_object.php");
+//require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/lab_edit_data_object.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/site_nav.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/select_input.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/form_element_classes/select_input.php");
 
 $db_h = 'kitliastdb.db.3766381.hostedresource.com';
 $db_u = 'kitliastdb';

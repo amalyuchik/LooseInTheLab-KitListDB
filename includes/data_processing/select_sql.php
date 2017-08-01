@@ -71,7 +71,7 @@ class select_sql
         {
             $query = "SELECT product_category_id AS 'ID', product_category_name AS 'data' FROM kitliastdb.product_categories ORDER BY product_category_name ASC";
         }
-        elseif($view == 'products') //for product categories dropdown
+        elseif($view == 'products') //for product dropdown
         {
             $query = "SELECT product_id AS 'ID', product_name AS 'data' FROM kitliastdb.products ORDER BY product_name ASC";
         }
