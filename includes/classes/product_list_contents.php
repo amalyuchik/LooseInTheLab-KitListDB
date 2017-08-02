@@ -46,7 +46,7 @@ class product_list_contents
         {
             $this->product_list_contents_html_string .= "<header><h1>Products in " . $this->product_category . " category</h1></header>";
             $this->product_list_contents_html_string .= "<p>" . count($sql_execute) . " Products in this category.</p>";
-            $this->product_list_contents_html_string .= "<table id='book_detail_table' style='border: solid 1px grey;'>";
+            $this->product_list_contents_html_string .= "<table id='book_detail_table' style='border: solid 1px grey;max-width: 700px;'>";
             $this->product_list_contents_html_string .= "<tr> ";
                     $this->product_list_contents_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">Product Id</th>";
                     $this->product_list_contents_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">Product Name/SKU</th>";

@@ -34,6 +34,7 @@ class connections
 		catch (PDOException $e)
 			{
 				echo "Connection failed: " . $e->getMessage();
+				return $e->getMessage();
 			}
 		return $return_result;
 	}

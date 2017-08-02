@@ -37,6 +37,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
                     $('#product_list_result').html(data);
                 });
             }
+            document.getElementById('footer_para').innerText = 'Copyright 2017 ASM'
         }
     </script>
 <script>
@@ -48,13 +49,15 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
     <section>
         <div class="col-lg-3 col-md-4 col-sm-5">
             <header>
-                <strong>Choose product </strong>
+                <strong>Choose product category: </strong>
             </header>
-            <?php $select_field_categories = new select_input($global_product_categories_list,'Category','product_category_id',$product_category_id);
+            <?php $select_field_categories = new select_input($global_product_categories_list,'','product_category_id',$product_category_id);
             echo $select_field_categories->create_select_field(true);
-            echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"submit\" type=\"submit\" value=\"Submit\"></div>";?>&nbsp;
+            echo "<br /><p><a style=\"color: red;font-weight: bold; font-size: 15px;\" href='http://www.seriouslyfunnyscience.com/kit_db/product_edit.php?product_id=0'>Add Product</a></p>";
+            echo "</div>";?>
 
-        </div>
+
+
         <div class="col-lg-9 col-md-8 col-sm-7">
             <article>
                 <div id="product_list_result"></div> <!--Result of the product_list displays here-->
@@ -70,7 +73,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
     <?php $navigation = new site_nav(); ?>
 
     <footer>
-        <p>Copyright 2017 ASM</p>
+        <p id="footer_para"></p>
         <div id="testing"></div>
     </footer>
 </div>
