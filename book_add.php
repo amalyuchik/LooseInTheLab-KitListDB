@@ -7,7 +7,7 @@
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 $notes_css_style = 'peachy';
-$warning = "";
+$warning_notes = "";
 if (isset($_POST['book_state']) && $_POST['book_state'] != '')
 {
    $book_state_id = $_POST['book_state'];
@@ -33,7 +33,7 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
        else
        {
            $notes_css_style = "class=\"error\"";
-           $warning = "<p style='color: #FF0000;size: 10px;font-weight: bold;'>Notes field must be unique.</p>";
+           $warning_notes = "<p style='color: #FF0000;size: 10px;font-weight: bold;'>Notes field must be unique.</p>";
        }
    }
 }
@@ -80,7 +80,7 @@ book_date_created
                 <label for="book_name_supplemental">Book Name Supplemental: &nbsp;</label><br />
                 <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value="<?php echo $book_name_supplemental; ?>"><br /><br />
                 <label for="book_notes">Notes (this shows up in the book list when you select state): &nbsp;</label><br />
-                <input type="text" size="60" id="book_notes" <?php echo $notes_css_style; ?> name="book_notes" value="<?php echo $book_notes; ?>"><br /><?php echo $warning; ?><br />
+                <input type="text" size="60" id="book_notes" <?php echo $notes_css_style; ?> name="book_notes" value="<?php echo $book_notes; ?>"><br /><?php echo $warning_notes; ?><br />
 
                 <input type="submit"  value="Save and add labs" >
             </form><br /><br />
