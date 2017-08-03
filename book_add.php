@@ -53,18 +53,18 @@ book_date_created
             <form class="form-inline" action="<?php $thispage ?>" method="post">
 
                 <?php
-                $select_field_types = new select_input($global_states_list,'State','book_state','');
+                $select_field_types = new select_input($global_states_list,'State','book_state',$book_state_id);
                 echo $select_field_types->create_select_field(false);
                 echo "&nbsp;";
-                $select_field_categories = new select_input($global_grades_list,'Grade','book_grade','');
+                $select_field_categories = new select_input($global_grades_list,'Grade','book_grade',$book_grade_id);
                 echo $select_field_categories->create_select_field(false);
 
                 ?>
                 <br /><br />
                 <label for="book_name_supplemental">Book Name Supplemental: &nbsp;</label><br />
-                <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value=""><br /><br />
+                <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value="<?php echo $book_name_supplemental; ?>"><br /><br />
                 <label for="book_notes">Notes: &nbsp;</label><br />
-                <input type="text" size="60" id="book_notes" name="book_notes" value=""><br /><br />
+                <input type="text" size="60" id="book_notes" name="book_notes" value="<?php echo $book_notes; ?>"><br /><br />
                 <input type="submit"  value="Save and add labs" >
             </form><br /><br />
 
