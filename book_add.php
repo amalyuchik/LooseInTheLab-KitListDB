@@ -18,7 +18,7 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
    {
        $conn = new connections();
        $create_query = $conn->query_construct('create',$table_array,$field_value_array);
-       echo $create_query;
+       $create_book = $conn->runconn_sql_execute($connection_array, $create_query);
    }
 }
 
@@ -63,7 +63,7 @@ book_date_created
                 <br /><br />
                 <label for="book_name_supplemental">Book Name Supplemental: &nbsp;</label><br />
                 <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value="<?php echo $book_name_supplemental; ?>"><br /><br />
-                <label for="book_notes">Notes: &nbsp;</label><br />
+                <label for="book_notes">Notes (this shows up in the book list when you select state): &nbsp;</label><br />
                 <input type="text" size="60" id="book_notes" name="book_notes" value="<?php echo $book_notes; ?>"><br /><br />
                 <input type="submit"  value="Save and add labs" >
             </form><br /><br />
