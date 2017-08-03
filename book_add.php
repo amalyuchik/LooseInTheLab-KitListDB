@@ -6,6 +6,8 @@
  * Time: 9:50 AM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
+$notes_css_style = 'peachy';
+$warning = "";
 if (isset($_POST['book_state']) && $_POST['book_state'] != '')
 {
    $book_state_id = $_POST['book_state'];
@@ -13,12 +15,26 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
    $book_name_supplemental = $_POST['book_name_supplemental'];
    $book_notes = $_POST['book_notes'];
    $field_value_array = array("book_state_id_fk"=>$book_state_id, "book_grade_id_fk"=>$book_grade_id, "book_name_supplemental"=>$book_name_supplemental, "book_notes"=>$book_notes, "book_date_created"=>$current_date);
+   $field_value_check_array = array("book_state_id_fk"=>$book_state_id, "book_grade_id_fk"=>$book_grade_id, "book_notes"=>$book_notes);
+
    $table_array = array('books');
    if ($conn == null)
    {
        $conn = new connections();
-       $create_query = $conn->query_construct('create',$table_array,$field_value_array);
-       $create_book = $conn->runconn_sql_execute($connection_array, $create_query);
+
+       $check_existing_book_query = $conn->query_construct('read', $table_array, $field_value_check_array);
+       $execute_check = $conn->runconn_sql_execute($connection_array,$check_existing_book_query);
+
+       if (count($execute_check) < 1)
+       {
+           $create_query = $conn->query_construct('create',$table_array,$field_value_array);
+           $create_book = $conn->runconn_sql_execute($connection_array, $create_query);
+       }
+       else
+       {
+           $notes_css_style = "class=\"error\"";
+           $warning = "<p style='color: #FF0000;size: 10px;font-weight: bold;'>Notes field must be unique.</p>";
+       }
    }
 }
 
@@ -64,7 +80,8 @@ book_date_created
                 <label for="book_name_supplemental">Book Name Supplemental: &nbsp;</label><br />
                 <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value="<?php echo $book_name_supplemental; ?>"><br /><br />
                 <label for="book_notes">Notes (this shows up in the book list when you select state): &nbsp;</label><br />
-                <input type="text" size="60" id="book_notes" name="book_notes" value="<?php echo $book_notes; ?>"><br /><br />
+                <input type="text" size="60" id="book_notes" <?php echo $notes_css_style; ?> name="book_notes" value="<?php echo $book_notes; ?>"><br /><?php echo $warning; ?><br />
+
                 <input type="submit"  value="Save and add labs" >
             </form><br /><br />
 

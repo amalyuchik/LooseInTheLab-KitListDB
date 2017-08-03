@@ -87,13 +87,22 @@ class connections
 			else
 			{
 
-
+            $where_clause = '';
+            //var_export($field_values_array, true);
             //I need to go into select_sql and rewrite all the read queries to work here
 
             if (count($field_values_array) == 1)
             {
                 foreach ($field_values_array as $k => $v)
-                    $where_clause = "WHERE " . $k . " = " . $v;
+                    $where_clause = "WHERE " . $k . " = '" . $v ."'";
+            }
+            elseif (count($field_values_array) > 1)
+            {
+                $where_clause = "WHERE ";
+                foreach ($field_values_array as $k => $v)
+                    $where_clause .= "" . $k . " = '" . $v . "' AND ";
+
+                $where_clause = substr($where_clause, 0, strlen($where_clause)-5);	//Get rid of final " AND ".
             }
 
 
