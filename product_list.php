@@ -32,7 +32,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
             var selectedProdName = e.options[e.selectedIndex].text;
             if(selectedProdCat !== '')
             {
-                $.get("includes/validate.php?id=".concat(selectedProdCat, "&category_name=", selectedProdName), function (data) {
+                $.get("includes/get/get_product_list_processor.php?id=".concat(selectedProdCat, "&category_name=", selectedProdName), function (data) {
                     //alert(data);
                     $('#product_list_result').html(data);
                 });
@@ -53,7 +53,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
             </header>
             <?php $select_field_categories = new select_input($global_product_categories_list,'','product_category_id',$product_category_id);
             echo $select_field_categories->create_select_field(true);
-            echo "<br /><p><a style=\"color: red;font-weight: bold; font-size: 15px;\" href='http://www.seriouslyfunnyscience.com/kit_db/product_edit.php?product_id=0'>Add Product</a></p>";
+            echo "<br /><p><a id='add_link' href='http://www.seriouslyfunnyscience.com/kit_db/product_edit.php?product_id=0'>Add Product</a></p>";
             echo "</div>";?>
 
 

@@ -19,7 +19,6 @@ $table_array = array('book_lab_line');
 if ($post_book_id !== null && $post_lab_id !== null)
 {
     $query = $conn->query_construct("create",$table_array,$f_v_array);
-    echo $query;
     $sql_execute = $conn->runconn_sql_execute($connection_array,$query);
 }
 else

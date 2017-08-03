@@ -50,3 +50,8 @@ label{
 .editedElement{
     background-color: #FFFF9C;
 }
+#add_link{
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+}

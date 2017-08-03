@@ -15,7 +15,7 @@ $lab_name = $_GET['lab_name'];
     <META NAME="ROBOTS" CONTENT="NONE">
     <?php echo $bootstrapLink; ?>
     <?php echo $fontAwesomeLink; ?>
-    <link rel="stylesheet" href="css/nav_style.css" />
+    <link rel="stylesheet" href="../css/nav_style.css" />
     <style>
         td{
             padding-left: 10px;

@@ -11,7 +11,7 @@ $product_id=$_GET['product_id'];
  * Date: 4/15/17
  * Time: 3:15 AM
  */
-$d=date('Y-m-d H:i:s');
+
 
 if(isset($_POST['product_id'])) //ASM This adds a new product to the lab
 {
@@ -21,7 +21,7 @@ if(isset($_POST['product_id'])) //ASM This adds a new product to the lab
     //echo $query_product_category;
     $query_product_category_result = $add_product_conn->runconn_sql_execute($connection_array, $query_product_category);
 
-    $create_field_values_arr = new create_lab_product_line_field_values($_POST['lab_id'], $query_product_category_result[0]['data'], $_POST['lab_product_line_product_category_id'], $_POST['product_id'], $_POST['classroom_qty_product_add'], $_POST['participant_qty_product_add'], $_POST['presenter_qty_product_add'], $_POST['refill_qty_product_add'], $_POST['refill_qty_detail_product_add'], $_POST['retail_qty_product_add'], $_POST['retail_qty_detail_product_add'], $_POST['product_reusable_product_add'], $d, $d);
+    $create_field_values_arr = new create_lab_product_line_field_values($_POST['lab_id'], $query_product_category_result[0]['data'], $_POST['lab_product_line_product_category_id'], $_POST['product_id'], $_POST['classroom_qty_product_add'], $_POST['participant_qty_product_add'], $_POST['presenter_qty_product_add'], $_POST['refill_qty_product_add'], $_POST['refill_qty_detail_product_add'], $_POST['retail_qty_product_add'], $_POST['retail_qty_detail_product_add'], $_POST['product_reusable_product_add'], $current_date, $current_date);
     $add_product_query = $add_product_conn->query_construct('create',array('lab_product_line'),$create_field_values_arr);
     $add_product_query_execute = $add_product_conn->runconn_sql_execute($connection_array, $add_product_query);
 
@@ -92,8 +92,6 @@ if(isset($lab_id))
     <title><?php echo $edit_lab_result[0]['lab_name']; ?> | Edit</title>
 
 </head>
-
-<body>
 <body>
 <div class="container">
     <div class="row">
@@ -190,7 +188,7 @@ if(isset($lab_id))
             echo "<td><p style=\"width: 50px;padding-right:0px;\">";
             //echo "<input type=\"submit\"  value=\"Save\" >";
             //echo "<a href=\"". $thispage . "?lab_id=".$lab_id."&product_id=".$v['lab_product_line_product_id_fk']."\" ><i style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
-            echo "<a href=\"#\" onclick=\"post(".$recId.");\" ><i id=\"save".$recId."\" style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
+            echo "<a href=\"#\" onclick=\"save_product_edits(".$recId.");\" ><i id=\"save".$recId."\" style=\"color: green;\" class=\"fa fa-floppy-o\" aria-hidden=\"true\"></i></a>";//
             echo "&nbsp;&nbsp;&nbsp;<a href=\"". $thispage . "?lab_id=".$lab_id."&record_id=".$v['lab_product_line_id']."&delete=1\" ><i style=\"color: red;\" class=\"fa fa-trash-o\" aria-hidden=\"true\"></i></a>"; //
             echo "</p></td>";
 
@@ -226,7 +224,7 @@ if(isset($lab_id))
 //    if(strUser)
 //    document.getElementById('testing').innerHTML = strUser;
 
-    function post(v)
+    function save_product_edits(v)
     {
         var cq = '#'.concat('classroom_qty',v);
         var refq = '#'.concat('refill_qty',v);
@@ -271,6 +269,4 @@ if(isset($lab_id))
     }
 </script>
 </body>
-</body>
-
 </html>

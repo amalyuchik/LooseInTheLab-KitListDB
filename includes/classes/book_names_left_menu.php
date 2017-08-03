@@ -27,6 +27,10 @@ class book_names_left_menu
     {
         $book_menu_string = '';
         $this->iteration = $this->iteration - $this->iteration;
+        $book_menu_string .= "<header>";
+        $book_menu_string .= "<strong>Available Books</strong>";
+        $book_menu_string .= "</header>";
+        $book_menu_string .= "<div class=\"list-group table-of-contents\">";
         foreach ($this->sql_execute as $k => $v)
         {
             $book_menu_string .= "<a class=\"list-group-item\" href=\"#\" onclick=\"postBook(";//" . $_SERVER['PHP_SELF'] . "?book_id=
@@ -35,6 +39,7 @@ class book_names_left_menu
             $book_menu_string .= "\r\n";
             $this->iteration++;
         }
+        $book_menu_string .= "</div>";
         return $book_menu_string;
     }
 }

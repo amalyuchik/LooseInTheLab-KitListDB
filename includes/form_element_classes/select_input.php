@@ -42,9 +42,9 @@ class select_input
             $return_string .= "<option value=\"".$arr['ID']."\"";
 
             if($this->selected_item_id == $arr['ID'])
-                $return_string .= " selected";
+                $return_string .= " selected ";
 
-            $return_string .= " >".$arr['data']."</option>"."\r\n";
+            $return_string .= ">".$arr['data']."</option>"."\r\n";
         }
 
         $return_string .= "</select>";//</div>

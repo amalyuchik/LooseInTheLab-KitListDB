@@ -59,15 +59,15 @@ class book_detail
 
             $this->book_detail_html_string .=  "<table id='book_detail_table' style='border: solid 1px grey;'>";
             $this->book_detail_html_string .=  "<tr> ";
-            foreach ($sql_execute[0] as $k => $v)
-            {
-                if ($do_once < count($sql_execute[0])) {
-                    $this->book_detail_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">" . $k . "</th>";
-                }
-                else
-                    continue;
+            if ($sql_execute[0] != null) {
+                foreach ($sql_execute[0] as $k => $v) {
+                    if ($do_once < count($sql_execute[0])) {
+                        $this->book_detail_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">" . $k . "</th>";
+                    } else
+                        continue;
 
-                $do_once++;
+                    $do_once++;
+                }
             }
 
             $this->book_detail_html_string .=  "</tr>";
@@ -76,7 +76,7 @@ class book_detail
             $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
 
 
-                $this->book_detail_html_string .= "<td><a style=\"color: red;font-weight: bold; font-size: 15px;\" onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
+                $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
 
             $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
             foreach($sql_execute as $k=>$v)

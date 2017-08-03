@@ -67,30 +67,20 @@ if(isset($_GET['delete']))
                 ?>
 
             </form>
+            <a id="add_link" href="book_add.php">Add New Book</a>
         </div>
     <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-5">
-            <header>
-                <strong>Available Books</strong>
-            </header>
-            <div class="list-group table-of-contents">
+
 
             <?php
             if($sql_execute !== null)
             {
                 $book_menu = new book_names_left_menu($sql_execute);
                 echo $book_menu->generate_book_name_menu();
-//                $do_once = $do_once - $do_once;
-//                foreach ($sql_execute as $k => $v) {
-//                    echo "<a class=\"list-group-item\" href=\"" . $thispage . "?book_id=";
-//                    echo $sql_execute[$do_once]['book_id'] . "&book_name=".$sql_execute[$do_once]['Book Name']."\">" . $sql_execute[$do_once]['Book Name'];
-//                    echo "</a>";
-//                    echo "\r\n";
-//                    $do_once++;
-                //}
             }
             ?>
-            </div>
+
         </div>
         <div class="col-lg-9 col-md-8 col-sm-7">
 
