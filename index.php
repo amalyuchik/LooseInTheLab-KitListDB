@@ -7,7 +7,7 @@
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 //require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/sql_functions.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/select_sql.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/select_sql.php");
 
 echo "<table style='border: solid 1px black;'>";
 echo "<tr><th>Id</th><th>SKU</th><th>Name</th></tr>";
@@ -31,7 +31,7 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/connections.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
 
 $connection = new connections();
 
