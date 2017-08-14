@@ -1,5 +1,7 @@
 function postBook(book_id)
 {
+    document.getElementById('book_detail_result').innerHTML = '';
+
     $.post('includes/post/post_book_detail_processor.php', {post_book_id:book_id},
         function(data)
         {

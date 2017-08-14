@@ -22,5 +22,5 @@ if ($post_record_id !== null)
     $sql_execute = $conn->runconn_sql_execute($connection_array,$query);
 }
 else
-    echo $error_msg = "Record Id was not provided";
+    echo $error_msg = "Record Id was not valid";
 

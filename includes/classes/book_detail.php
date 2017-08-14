@@ -76,7 +76,7 @@ class book_detail
             $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
 
 
-                $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
+                $this->book_detail_html_string .= "<td></td><td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
 
             $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
             foreach($sql_execute as $k=>$v)
