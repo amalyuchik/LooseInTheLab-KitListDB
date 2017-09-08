@@ -58,3 +58,8 @@ label{
 .error {
     background-color: mistyrose;
 }
+.login_failed {
+    /*background-color: lightpink;*/
+    color: darkred;
+    border-color:darkred;
+}

@@ -6,6 +6,7 @@
  * Time: 9:50 AM
  */
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/book_detail.php");
 $notes_css_style = 'peachy';
 $warning_notes = "";
 if (isset($_POST['book_state']) && $_POST['book_state'] != '')
@@ -29,6 +30,11 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
        {
            $create_query = $conn->query_construct('create',$table_array,$field_value_array);
            $create_book = $conn->runconn_sql_execute($connection_array, $create_query);
+           $retrieve_inserted_book_id_query = $conn->query_construct('read', $table_array,$field_value_array);
+           //echo $retrieve_inserted_book_id_query;
+           $retrieve_inserted_book_id_sql_execute = $conn->runconn_sql_execute($connection_array,$retrieve_inserted_book_id_query);
+           //echo var_export($retrieve_inserted_book_id_sql_execute, true);
+           //echo $retrieve_inserted_book_id_sql_execute[0]['book_id'];
        }
        else
        {
@@ -43,7 +49,8 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
 <html>
 <head>
     <META NAME="ROBOTS" CONTENT="NONE">
-    <?php echo $bootstrapLink; ?>
+    <?php echo $bootstrapLink;
+    echo $jQueryLink;?>
 <?php echo $fontAwesomeLink; ?>
 <link rel="stylesheet" href="css/nav_style.css" />
 <style>
@@ -85,12 +92,21 @@ book_date_created
                 <input type="submit"  value="Save and add labs" >
             </form><br /><br />
 
-
+            <?php
+            if ($retrieve_inserted_book_id_sql_execute[0]['book_id'] != null)
+            {
+                $book_contents = new book_detail($connection_array, $_GET['Book Name'],$retrieve_inserted_book_id_sql_execute[0]['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
+            }
+            else
+            {
+                $book_contents = '';
+            }
+            ?>
 
 
 
         </section>
-        <?php $navigation = new site_nav(); ?>
+        <?php echo $navigation = new site_nav(); ?>
 
         <footer>
             <p>Copyright 2017 ASM</p>
@@ -98,5 +114,6 @@ book_date_created
         </footer>
     </div>
 </div>
+<script type="text/javascript" src="js/book_helpers.js"></script>
 </body>
 </html>

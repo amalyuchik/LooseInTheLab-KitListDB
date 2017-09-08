@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="585c1cfd-cf20-4ec8-b62e-c30a4cbae7eb" name="Workshops" url="http://www.seriouslyfunnyscience.com/workshops">
+        <fileTransfer host="www.seriouslyfunnyscience.com" port="21" accessType="FTPS">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

@@ -51,34 +51,35 @@ class book_detail
         $book_name_select = $this->select_sql->query("book_name", null, null, $bk_id);
         $book_name_sql_execute = $this->conn->runconn_sql_execute($this->connection_array,$book_name_select);
   //      var $do_once=0;
+        $this->book_detail_html_string .= "<header><h1>".$book_name_sql_execute[0]['Book Name']."</h1></header>";
+        $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
+
+
+        $this->book_detail_html_string .=  "<table id='book_detail_table' style='border: solid 1px grey;'>";
+        $this->book_detail_html_string .=  "<tr> ";
+        if ($sql_execute[0] != null) {
+            foreach ($sql_execute[0] as $k => $v) {
+                if ($do_once < count($sql_execute[0])) {
+                    $this->book_detail_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">" . $k . "</th>";
+                } else
+                    continue;
+
+                $do_once++;
+            }
+        }
+
+        $this->book_detail_html_string .=  "</tr>";
+        $do_once = $do_once-$do_once;
+
+        $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
+
+
+            $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
+
+        $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
+
         if($sql_execute !== null)
         {
-            $this->book_detail_html_string .= "<header><h1>".$book_name_sql_execute[0]['Book Name']."</h1></header>";
-            $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
-
-
-            $this->book_detail_html_string .=  "<table id='book_detail_table' style='border: solid 1px grey;'>";
-            $this->book_detail_html_string .=  "<tr> ";
-            if ($sql_execute[0] != null) {
-                foreach ($sql_execute[0] as $k => $v) {
-                    if ($do_once < count($sql_execute[0])) {
-                        $this->book_detail_html_string .= "<th style='padding-top: 5px;padding-bottom: 5px;' class=\"table_header\">" . $k . "</th>";
-                    } else
-                        continue;
-
-                    $do_once++;
-                }
-            }
-
-            $this->book_detail_html_string .=  "</tr>";
-            $do_once = $do_once-$do_once;
-
-            $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
-
-
-                $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
-
-            $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
             foreach($sql_execute as $k=>$v)
             {
                 $this->book_detail_html_string .=  "<tr><td style=\"padding-left:5px;padding-right:5px;border-bottom:1px solid grey;text-align: center;\">";

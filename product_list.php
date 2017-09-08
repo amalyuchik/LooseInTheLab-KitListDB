@@ -70,7 +70,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
             </article>
         </div>
     </section>
-    <?php $navigation = new site_nav(); ?>
+    <?php echo $navigation = new site_nav(); ?>
 
     <footer>
         <p id="footer_para"></p>

@@ -40,7 +40,6 @@ class select_input
         foreach($this->data_array_ID_data as $arr)
         {
             $return_string .= "<option value=\"".$arr['ID']."\"";
-
             if($this->selected_item_id == $arr['ID'])
                 $return_string .= " selected ";
 

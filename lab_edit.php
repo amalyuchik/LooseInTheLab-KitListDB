@@ -214,7 +214,7 @@ if(isset($lab_id))
         </section>
     </div>
 
-    <?php $navigation = new site_nav(); ?>
+    <?php echo $navigation = new site_nav(); ?>
 
     <footer>
         <p>Copyright 2017 ASM</p>
