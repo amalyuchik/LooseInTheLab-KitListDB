@@ -104,7 +104,8 @@ if(isset($product_id) && $product_id !== 0)
 </form>
 
     </section>
-<?php echo $navigation = new site_nav(); ?>
+    <?php /** @var TYPE_NAME $navigation */
+echo $navigation = new site_nav(); ?>
 
 <footer>
     <p>Copyright 2017 ASM</p>

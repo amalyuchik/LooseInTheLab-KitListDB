@@ -97,7 +97,8 @@ if(isset($_GET['delete']))
     </div>
 </section>
 
-		<?php echo $navigation = new site_nav(); ?>
+    <?php /** @var Site Navigation $navigation */
+        echo $navigation = new site_nav(); ?>
 
 	<footer>
 		<p>Copyright 2017 ASM</p>
