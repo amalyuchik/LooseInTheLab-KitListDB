@@ -20,6 +20,7 @@ class site_nav
         $this->nav_string .= '<li class="nav-item"><a class="nav-link" href="/kit_db/">Home</a></li>';
         $this->nav_string .= '<li class="nav-item"><a class="nav-link" href="/kit_db/books.php">Books</a></li>';
         $this->nav_string .= '<li class="nav-item"><a class="nav-link" href="http://www.seriouslyfunnyscience.com/kit_db/product_list.php">Products</a></li>';
+		$this->nav_string .= '<li class="nav-item"><a class="nav-link disabled" href="http://www.seriouslyfunnyscience.com/workshops">Workshops</a></li>';
 		$this->nav_string .= '<li class="nav-item"><a class="nav-link disabled" href="/contact">Contact us</a></li>';
 		$this->nav_string .= '</ul>';
 		$this->nav_string .= '</nav></div></div>';
