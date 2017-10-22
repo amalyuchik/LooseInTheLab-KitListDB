@@ -110,7 +110,7 @@ book_date_created
         echo $navigation = new site_nav(); ?>
 
         <footer>
-            <p>Copyright 2017 ASM</p>
+            <p><?php        echo $_SESSION['user']->user_first_name . " " . $_SESSION['user']->user_last_name . " is logged in as " . $_SESSION['user']->username . ".";    ?></p>    <p>Copyright 2017 Loose in the Lab</p>
             <div id="testing"></div>
         </footer>
     </div>
