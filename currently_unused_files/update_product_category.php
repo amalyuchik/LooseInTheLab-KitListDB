@@ -1,4 +1,7 @@
 <?php
+if(!isset($_COOKIE['ID_LooseInTheLab'])){
+    header("Location: http://www.seriouslyfunnyscience.com/workshops/login.php");
+}
 /**
  * Created by PhpStorm.
  * User: amalyuchik

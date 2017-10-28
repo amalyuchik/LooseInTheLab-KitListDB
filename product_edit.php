@@ -1,4 +1,7 @@
 <?php
+if(!isset($_COOKIE['ID_LooseInTheLab'])){
+    header("Location: http://www.seriouslyfunnyscience.com/workshops/login.php");
+}
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 $field_value_arr = array(); //id field/id value first. Then all other values
 $table = array(0=>'products');

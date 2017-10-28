@@ -1,4 +1,7 @@
 <?php
+if(!isset($_COOKIE['ID_LooseInTheLab'])){
+    header("Location: http://www.seriouslyfunnyscience.com/workshops/login.php");
+}
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/add_lab_product.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/create_lab_product_line_field_values.php");
