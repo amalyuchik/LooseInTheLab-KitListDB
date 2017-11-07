@@ -1,0 +1,46 @@
+/** from books.php select inputs
+            <label for="state">State: &nbsp;</label><select name="state">
+            <?php foreach($global_states_list as $option_arr)
+            echo '<option value="'.$option_arr['State ID'].'">'.$option_arr['State'].'</option>';
+            ?>
+            </select><br /><br />
+            <label for="grade">Grade: &nbsp;</label><select name="grade">
+            <?php foreach($global_grades_list as $option_arr)
+            echo '<option value="'.$option_arr['grade_id'].'">'.$option_arr['Grade'].'</option>';
+            ?>
+            </select><br /><br />
+            <label for="notes">Book Type: &nbsp;</label><select name="notes">
+            <?php foreach($global_notes_list as $option_arr)
+            echo '<option value="'.$option_arr['book_notes'].'">'.$option_arr['book_notes'].'</option>';
+            ?>
+            </select>
+             */
+
+
+             /** if the above doesn't work, uncomment this from lab_edit.php
+                 <label>Lab Type: &nbsp;</label><select name="lab_type">
+                 <?php
+                 echo var_export($global_lab_types_list,true);
+                 foreach($global_lab_types_list as $arr)
+                 {
+                 echo "<option value=\"".$arr['ID']."\"";
+                 if($edit_lab_result[0]['lab_type_id_fk'] == $arr['ID'])
+                 echo "selected";
+                 echo ">".$arr['data']."</option>";
+                 }
+                 ?>
+                 </select>
+                 &nbsp;&nbsp;<label>Lab Category: &nbsp;</label><select name="lab_category">
+                 <?php
+                 echo var_export($global_lab_types_list,true);
+                 foreach($global_lab_categories_list as $arr)
+                 {
+                 echo "<option value=\"".$arr['ID']."\"";
+                 if($edit_lab_result[0]['lab_category_id_fk'] == $arr['ID'])
+                 echo "selected";
+                 echo ">".$arr['data']."</option>";
+                 }
+                 echo "</input>";
+                 ?>
+                 </select>
+                  */

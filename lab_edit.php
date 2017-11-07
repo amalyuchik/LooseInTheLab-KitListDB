@@ -1,4 +1,7 @@
 <?php
+if(!isset($_COOKIE['ID_LooseInTheLab'])){
+    header("Location: http://www.seriouslyfunnyscience.com/workshops/login.php");
+}
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/add_lab_product.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/create_lab_product_line_field_values.php");
@@ -218,7 +221,7 @@ if(isset($lab_id))
     echo $navigation = new site_nav(); ?>
 
     <footer>
-        <p>Copyright 2017 ASM</p>
+        <p><?php        echo $_SESSION['user']->user_first_name . " " . $_SESSION['user']->user_last_name . " is logged in as " . $_SESSION['user']->username . ".";    ?></p>    <p>Copyright 2017 Loose in the Lab</p>
     </footer>
 </div>
 <script type="text/javascript">

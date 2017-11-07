@@ -1,7 +1,4 @@
 <?php
-if(!isset($_COOKIE['ID_LooseInTheLab'])){
-    header("Location: http://www.seriouslyfunnyscience.com/workshops/login.php");
-}
 /**
  * Created by PhpStorm.
  * User: amalyuchik
@@ -29,7 +26,7 @@ if (isset($_POST['product_category_id']) && $_POST['product_category_id'] !== nu
 	<?php echo $bootstrapLink;
 			echo $jQueryLink;
             echo $fontAwesomeLink;?>
-<link rel="stylesheet" href="../css/nav_style.css" />
+<link rel="stylesheet" href="css/nav_style.css" />
 <style>
 
 </style>

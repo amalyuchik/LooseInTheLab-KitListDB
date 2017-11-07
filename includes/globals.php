@@ -5,6 +5,9 @@
  * Date: 4/4/17
  * Time: 10:35 PM
  */
+session_save_path($_SERVER['DOCUMENT_ROOT'].'/sessions/');
+require_once($_SERVER['DOCUMENT_ROOT'].'/workshops/wksp_includes/auth/user_authentication.php');//must be required before session starts for proper data serialization/deserializeation
+session_start();
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/select_sql.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/sql_functions.php");
@@ -33,7 +36,7 @@ $bootstrapLink = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/b
 $angularJSLink = '<script data-require="angular.js@1.6.1" data-semver="1.6.1" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>';
 $angularRouteLink = '<script data-require="angular-route@1.3.0" data-semver="1.3.0" src="https://code.angularjs.org/1.3.0/angular-route.js"></script>';
 $jQueryLink = '<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>';
-$fontAwesomeLink = '<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">';
+$fontAwesomeLink = '<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">';
 $thispage = $_SERVER['PHP_SELF'];
 //End include script tags
 
