@@ -5,7 +5,7 @@
  * Date: 4/4/17
  * Time: 10:35 PM
  */
-session_start();
+//session_start();
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/connections.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/select_sql.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/data_processing/sql_functions.php");
