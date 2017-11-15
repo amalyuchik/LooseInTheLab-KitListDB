@@ -92,37 +92,51 @@ foreach ($sql_execute as $current_record)
 
                 <article>
                     <div id="book_detail_result">
-                        <table>
+
                         <?php
+                        $product_category_while_loop = '';
                         foreach ($kit_master_array as $item_object)
                         {
-                            echo "<tr>";
+                            if($product_category_while_loop !='' && $product_category_while_loop != $item_object->product_category)
+                                echo "</table>";
+                            if($product_category_while_loop != $item_object->product_category)
+                            {
+                                $product_category_while_loop = $item_object->product_category;
+                                echo "<h3>".$product_category_while_loop."</h3><table width=\"600px\">";
+                            }
+
+                                echo "<tr>";
 //                            echo "<td>";
 //                            echo $item_object->product_id;
 //                            echo "</td>";
-                            echo "<td>";
-                            echo $item_object->product_sku;
-                            echo "</td>";
-                            echo "<td>";
-                            echo $item_object->product_name;
-                            echo "</td>";
+                                if ($item_object->product_category_id != 6)
+                                {
+                                    echo "<td>";
+                                    echo $item_object->product_sku;
+                                    echo "</td>";
+                                }
+                                echo "<td width=\"440px\">";
+                                echo $item_object->product_name;
+                                echo "</td>";
 
-                            echo "<td>";
-                            echo $item_object->consumable_qty + $item_object->reusable_qty;
-                            echo "</td><td>&nbsp;&nbsp;&nbsp;</td>";
+                                echo "<td>";
+                                echo $item_object->consumable_qty + $item_object->reusable_qty;
+                                echo "</td><td>&nbsp;&nbsp;&nbsp;</td>";
 
-                            echo "<td>";
-                            if ($item_object->product_category_id != 6) {
-                                $total = $item_object->product_reusable_price + $item_object->product_consumable_price;
-                                echo money_format('%(#10n',$total);
-                            }
+                                echo "<td>";
+                                if ($item_object->product_category_id != 6) {
+                                    $total = $item_object->product_reusable_price + $item_object->product_consumable_price;
+                                    echo money_format('%(#10n', $total);
+                                }
 
-                            echo "</td>";
-                            echo "</tr>";
+                                echo "</td>";
+                                echo "</tr>";
+
                             if ($item_object->product_category_id != 6)
                                 $total_kit_price += $item_object->product_reusable_price + $item_object->product_consumable_price;
                         }
-                        ?></table>
+                        echo "</table>";
+                        ?>
 
                         <?php
                         echo "<strong>". $total_kit_price . "</strong>"; ?>
