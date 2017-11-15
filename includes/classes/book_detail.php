@@ -54,10 +54,10 @@ class book_detail
         $this->book_detail_html_string .= "<header><h1>".$book_name_sql_execute[0]['Book Name']."</h1></header>";
         $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
 
-        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/grade_level_kit.php?book_id=".$bk_id."\" target=_blank >Grade Level Kit</a> | ";
-        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/classroom_level_kit.php?book_id=".$bk_id."\" target=_blank >Classroom Level Kit</a> | ";
-        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/refill_kit.php?book_id=".$bk_id."\" target=_blank >Refill Kits</a> | ";
-        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/workshop_kits.php?book_id=".$bk_id."\" target=_blank >Workshop Kits</a>";
+        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/grade_level_kit.php?book_id=".$bk_id."\" target=_blank >Grade Level Kit</a> | ";
+        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/classroom_level_kit.php?book_id=".$bk_id."\" target=_blank >Classroom Level Kit</a> | ";
+        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/refill_kit.php?book_id=".$bk_id."\" target=_blank >Refill Kits</a> | ";
+        $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/workshop_kits.php?book_id=".$bk_id."\" target=_blank >Workshop Kits</a>";
 
         $this->book_detail_html_string .=  "<table id='book_detail_table' style='border: solid 1px grey;'>";
         $this->book_detail_html_string .=  "<tr> ";

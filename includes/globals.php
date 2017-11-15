@@ -38,6 +38,7 @@ $angularRouteLink = '<script data-require="angular-route@1.3.0" data-semver="1.3
 $jQueryLink = '<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>';
 $fontAwesomeLink = '<link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">';
 $thispage = $_SERVER['PHP_SELF'];
+setlocale(LC_MONETARY, 'en_US');
 //End include script tags
 
 
