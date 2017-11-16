@@ -83,7 +83,7 @@ class select_sql
         {
             $query = "SELECT books.book_name, books.book_id, books.book_state, books.book_state_id_fk, 
                         book_lab_line.book_lab_line_lab_id_fk, book_lab_line.book_lab_line_book_id_fk,
-                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_category_id,lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_classroom_qty, lab_product_line.lab_product_line_is_reusable as reusable,
+                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_classroom_qty, lab_product_line.lab_product_line_is_reusable as reusable,
                         products.product_sku, products.product_id, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
                         FROM books
                          JOIN book_lab_line ON books.book_id=book_lab_line.book_lab_line_book_id_fk
@@ -96,26 +96,52 @@ class select_sql
         {
             $query = "SELECT books.book_name, books.book_id, books.book_state, books.book_state_id_fk, 
                         book_lab_line.book_lab_line_lab_id_fk, book_lab_line.book_lab_line_book_id_fk,
-                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_category_id,lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_refill_qty, lab_product_line.lab_product_line_refill_qty_detail, lab_product_line.lab_product_line_is_reusable as reusable,
-                        products.product_sku, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
+                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_refill_qty, lab_product_line.lab_product_line_refill_qty_detail, lab_product_line.lab_product_line_is_reusable as reusable,
+                        products.product_sku, products.product_id, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
                         FROM books
                          JOIN book_lab_line ON books.book_id=book_lab_line.book_lab_line_book_id_fk
                          JOIN lab_product_line ON book_lab_line.book_lab_line_lab_id_fk=lab_product_line.lab_product_line_lab_id_fk
                          JOIN products ON lab_product_line.lab_product_line_product_id_fk=products.product_id
-                        WHERE books.book_id = $book_id and (lab_product_line.lab_product_line_refill_qty > 0 and lab_product_line.lab_product_line_refill_qty is not null)
+                        WHERE books.book_id = $book_id and lab_product_line.lab_product_line_refill_qty > 0
                         order by product_category_id_fk, product_name";
         }
-        elseif($view == 'participant_kit_list') //for participant kit list materials
+        elseif($view == 'participant_kit_list') //for grade kit list refill materials
         {
-            $query = "SELECT lab_id AS 'ID', lab_name AS 'data' FROM kitliastdb.labs ORDER BY lab_name ASC";
+            $query = "SELECT books.book_name, books.book_id, books.book_state, books.book_state_id_fk, 
+                        book_lab_line.book_lab_line_lab_id_fk, book_lab_line.book_lab_line_book_id_fk,
+                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_participant_qty, lab_product_line.lab_product_line_is_reusable as reusable,
+                        products.product_sku, products.product_id, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
+                        FROM books
+                         JOIN book_lab_line ON books.book_id=book_lab_line.book_lab_line_book_id_fk
+                         JOIN lab_product_line ON book_lab_line.book_lab_line_lab_id_fk=lab_product_line.lab_product_line_lab_id_fk
+                         JOIN products ON lab_product_line.lab_product_line_product_id_fk=products.product_id
+                        WHERE books.book_id = $book_id and lab_product_line.lab_product_line_participant_qty > 0
+                        order by product_category_id_fk, product_name";
         }
         elseif($view == 'presenter_kit_list') //for presenter kit list materials
         {
-            $query = "SELECT lab_id AS 'ID', lab_name AS 'data' FROM kitliastdb.labs ORDER BY lab_name ASC";
+            $query = "SELECT books.book_name, books.book_id, books.book_state, books.book_state_id_fk, 
+                        book_lab_line.book_lab_line_lab_id_fk, book_lab_line.book_lab_line_book_id_fk,
+                        lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_category, lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_presenter_qty, lab_product_line.lab_product_line_is_reusable as reusable,
+                        products.product_sku, products.product_id, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
+                        FROM books
+                         JOIN book_lab_line ON books.book_id=book_lab_line.book_lab_line_book_id_fk
+                         JOIN lab_product_line ON book_lab_line.book_lab_line_lab_id_fk=lab_product_line.lab_product_line_lab_id_fk
+                         JOIN products ON lab_product_line.lab_product_line_product_id_fk=products.product_id
+                        WHERE books.book_id = $book_id and lab_product_line.lab_product_line_presenter_qty > 0
+                        order by product_category_id_fk, product_name";
         }
         elseif($view == 'retail_kit_list') //for retail kit list materials
         {
-            $query = "SELECT lab_id AS 'ID', lab_name AS 'data' FROM kitliastdb.labs ORDER BY lab_name ASC";
+            $query = "SELECT books.book_id,  
+	lab_product_line.lab_product_line_lab_id_fk, lab_product_line.lab_product_line_product_id_fk, lab_product_line.lab_product_line_retail_qty, lab_product_line.lab_product_line_retail_qty_detail, lab_product_line.lab_product_line_is_reusable as reusable,
+	products.product_sku, products.product_id, products.product_name, products.product_price, products.product_category_id_fk, products.product_category
+	FROM books
+	 JOIN book_lab_line ON books.book_id=book_lab_line.book_lab_line_book_id_fk
+	 JOIN lab_product_line ON book_lab_line.book_lab_line_lab_id_fk=lab_product_line.lab_product_line_lab_id_fk
+	 JOIN products ON lab_product_line.lab_product_line_product_id_fk=products.product_id
+	WHERE books.book_id = $book_id and lab_product_line.lab_product_line_retail_qty > 0
+	order by product_category_id_fk, product_name";
         }
         else
         {

@@ -63,3 +63,7 @@ label{
     color: darkred;
     border-color:darkred;
 }
+h2 {
+    color: darkred;
+    font-style: italic;
+}
