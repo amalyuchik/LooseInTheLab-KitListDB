@@ -50,9 +50,39 @@ if(isset($_GET['delete']))
     <script>
                 function selected()
                 {
-                    if(document.getElementById('book_detail_table'))
-                    document.getElementById('book_detail_table').innerHTML = '';
-                    document.getElementById('button').click();
+                    var e = document.getElementById("book_name_supplemental");
+                    var selectedBookId = e.options[e.selectedIndex].value;
+                    var selectedBookName = e.options[e.selectedIndex].text;
+                    if(selectedBookId !== '')
+                    {
+                        if (document.getElementById('book_detail_table'))
+                            document.getElementById('book_detail_table').innerHTML = '';
+                        $.get("includes/get/get_commercial_book_processor.php?book_id=".concat(selectedBookId, "&book_name_supplemental=", selectedBookName), function (data) {
+                            //alert(data);
+                            $('#book_detail_result').html(data);
+                        });
+                    }
+                    //if(document.getElementById('book_name_supplemental').
+                    var e1 = document.getElementById("state");
+                    var selectedStateId = e1.options[e1.selectedIndex].value;
+                    var selectedStateName = e1.options[e1.selectedIndex].text;
+                    if (selectedStateId != '') //inside this if statement should be re-written as per above and use REST
+                    {
+                        if (document.getElementById('book_detail_table'))
+                            document.getElementById('book_detail_table').innerHTML = '';
+
+                        $.get("includes/get/get_available_state_book_menu.php?state_id=".concat(selectedStateId, "&state_name=", selectedStateName), function (data) {
+                            //alert(data);
+                            $('#book_menu').html(data);
+                        });
+//                        $.post('includes/post/post_book_detail_processor.php', {post_book_id:book_id},
+//                            function(data)
+//                            {
+//                                $('#book_detail_result').html(data);
+//                                //alert(data);
+//                            });
+                        //document.getElementById('button').click();
+                    }
                 }
     </script>
 </head>
@@ -63,8 +93,13 @@ if(isset($_GET['delete']))
         <div class="form-group">
             <form class="form-horizontal" action="<?php $thispage ?>" method="post">
                 <?php
-                $select_field_state = new select_input($global_available_states_list,'State','state',$sql_execute[0]['book_state_id_fk']);
+                $select_field_state = new select_input($global_available_states_list,'State','state','');//$sql_execute[0]['book_state_id_fk']
                 echo $select_field_state->create_select_field(true);
+                echo "<br />";
+                $select_field_stateless = new select_input($global_available_stateless_list,'Commercial Books','book_name_supplemental','');//$sql_execute[0]['book_id']
+                echo $select_field_stateless->create_select_field(true);
+
+
 
                 echo "<div class=\"col-lg-10\"><input style=\"display:none;\" id=\"button\" type=\"submit\" value=\"Submit\"></div>";
                 ?>
@@ -73,15 +108,15 @@ if(isset($_GET['delete']))
             <a id="add_link" href="book_add.php">Add New Book</a>
         </div>
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-5">
+        <div class="col-lg-3 col-md-4 col-sm-5" id="book_menu">
 
 
             <?php
-            if($sql_execute !== null)
-            {
-                $book_menu = new book_names_left_menu($sql_execute);
-                echo $book_menu->generate_book_name_menu();
-            }
+//            if($sql_execute !== null)
+//            {
+//                $book_menu = new book_names_left_menu($sql_execute);
+//                echo $book_menu->generate_book_name_menu();
+//            }
             ?>
 
         </div>
@@ -89,12 +124,6 @@ if(isset($_GET['delete']))
 
             <article>
                 <div id="book_detail_result"></div> <!--Result of the Book_detail displays here-->
-                <?php
-//                if ($_GET['book_id'] !== null)
-//                {
-//                    $book_contents = new book_detail($connection_array, $_GET['Book Name'],$_GET['book_id'],$conn,$select_sql,'','',$global_lab_names_list);
-//                }
-                ?>
             </article>
         </div>
     </div>

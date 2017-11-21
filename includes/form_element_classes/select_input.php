@@ -26,6 +26,7 @@ class select_input
     function create_select_field($on_change)
     {
         $return_string = '';
+
         if($this->label !== '')
             $return_string .= "<label for='".$this->select_name."' class=\"control-label\">$this->label: &nbsp; </label>";
 

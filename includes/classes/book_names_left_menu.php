@@ -28,7 +28,7 @@ class book_names_left_menu
         $book_menu_string = '';
         $this->iteration = $this->iteration - $this->iteration;
         $book_menu_string .= "<header>";
-        $book_menu_string .= "<strong>Available Books</strong>";
+        $book_menu_string .= "<strong>Available Books for <em style='font-size: 18px; color: darkred;'>".$this->sql_execute[0]['book_state']."</em></strong>";
         $book_menu_string .= "</header>";
         $book_menu_string .= "<div class=\"list-group table-of-contents\">";
         foreach ($this->sql_execute as $k => $v)

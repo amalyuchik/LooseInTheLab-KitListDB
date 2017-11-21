@@ -17,7 +17,6 @@ class select_sql
             //,states.state_abbreviation AS 'State',grades.grade_grade AS 'Grade',books.book_name AS 'Book Name',books.book_notes AS 'Notes', books.book_state_id_fk,books.book_grade_id_fk
             $query = "SELECT book_id, book_grade_id_fk, book_notes, book_state, book_state_id_fk, CONCAT(' Grade ', grades.grade_grade ,' ' ,book_notes) as 'Book Name'  FROM books
                       INNER JOIN grades ON books.book_grade_id_fk = grades.grade_id WHERE book_state_id_fk = $state_id ORDER BY book_name"; // AND book_grade_id_fk = $grade_id
-            return $query;
         }
         elseif($view == 'book_contents')//to see the contents of a book
         {
@@ -30,16 +29,35 @@ class select_sql
                         WHERE book_lab_line_book_id_fk = ".$book_id."
                         ORDER BY book_lab_line_id";
         }
+        elseif($view == 'commercial_book_contents')//to see the contents of a book
+        {
+            $query = "SELECT book_lab_line_lab_id_fk AS 'Lab ID',labs.lab_name AS 'Lab Name', book_lab_line_id AS 'Delete'
+                        FROM kitliastdb.book_lab_line
+                        LEFT JOIN books ON book_lab_line_book_id_fk = book_id
+                        LEFT JOIN labs ON book_lab_line_lab_id_fk = lab_id
+                        WHERE book_lab_line_book_id_fk = ".$book_id."
+                        ORDER BY book_lab_line_id";
+        }
         elseif($view == 'available_state_list') //for book states dropdown
         {
             $query = "SELECT DISTINCT books.book_state_id_fk AS 'ID', states.state_name AS 'State Name', states.state_abbreviation AS 'data' FROM books
                       INNER JOIN states on state_id = book_state_id_fk ORDER BY states.state_abbreviation";
+        }
+        elseif($view == 'available_stateless_list') //for book states dropdown
+        {
+            $query = "SELECT DISTINCT books.book_id AS 'ID', books.book_name_supplemental AS 'Book Name', books.book_name_supplemental AS 'data' FROM books
+                      WHERE books.book_state_id_fk is NULL and books.book_name_supplemental != '' ORDER BY books.book_name_supplemental";
         }
         elseif($view == 'book_name') //for book name in Book Detail
         {
             $query = "SELECT concat(states.state_abbreviation, ' ',grades.grade_grade,' ',books.book_notes) AS 'Book Name' FROM kitliastdb.books
                         LEFT JOIN states ON  book_state_id_fk = states.state_id
                         LEFT JOIN grades ON book_grade_id_fk = grades.grade_id
+                        WHERE book_id = ".$book_id;
+        }
+        elseif($view == 'commercial_book_name') //for book name in Book Detail
+        {
+            $query = "SELECT book_name_supplemental AS 'Book Name' FROM kitliastdb.books
                         WHERE book_id = ".$book_id;
         }
         elseif($view == 'state_list') //for states dropdown
@@ -54,11 +72,12 @@ class select_sql
         {
             $query = "SELECT distinct book_notes AS 'data' FROM kitliastdb.books ORDER BY book_notes ASC";
         }
-        elseif($view == 'books')
-        {
-            //$query = "SELECT distinct book_id AS 'ID', book_name AS 'data' FROM kitliastdb.books ORDER BY book_name ASC";
-            $query = "SELECT distinct book_id AS 'ID', CONCAT(book_state,' Grade ', grades.grade_grade, ' ' ,book_notes) AS 'data' FROM kitliastdb.books LEFT JOIN grades ON book_grade_id_fk = grades.grade_id ORDER BY book_name ASC";
-        }
+//        elseif($view == 'books') There's a duplicate above
+//        {
+//            //$query = "SELECT distinct book_id AS 'ID', book_name AS 'data' FROM kitliastdb.books ORDER BY book_name ASC";
+//            echo "here I AM: " . $state_id;
+//            $query = "SELECT book_id AS 'ID', CONCAT(book_state,' Grade ', grades.grade_grade, ' ' ,book_notes) AS 'data' FROM kitliastdb.books LEFT JOIN grades ON book_grade_id_fk = grades.grade_id WHERE book_state_id_fk = ".$state_id. " ORDER BY book_name ASC";
+//        }
         elseif($view == 'lab_types') //for lab types dropdown
         {
             $query = "SELECT lab_type_id AS 'ID', lab_type AS 'data' FROM kitliastdb.lab_types ORDER BY lab_type ASC";

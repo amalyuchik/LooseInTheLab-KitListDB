@@ -11,6 +11,8 @@ if ($conn == null)
 {
     $conn = new connections();
 }
+if ($select_sql == null)
+    $select_sql = new select_sql();
 $post_book_id = stripslashes($_POST['post_book_id']);
 if ($post_book_id !== null)
 {

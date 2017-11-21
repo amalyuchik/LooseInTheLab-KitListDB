@@ -71,6 +71,10 @@ if($global_available_states_list == null)
 {
     $query_available_states = $select_sql->query("available_state_list");
     $global_available_states_list = $conn_globals->runconn_sql_execute($connection_array, $query_available_states);
+}if($global_available_stateless_list == null)
+{
+    $query_available_stateless = $select_sql->query("available_stateless_list");
+    $global_available_stateless_list = $conn_globals->runconn_sql_execute($connection_array, $query_available_stateless);
 }if($global_states_list == null)
 {
     $query_states = $select_sql->query("state_list");

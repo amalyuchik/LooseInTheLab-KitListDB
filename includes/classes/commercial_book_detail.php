@@ -1,15 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Created by IntelliJ IDEA.
  * User: amalyuchik
- * Date: 7/19/2017
- * Time: 10:38 AM
+ * Date: 11/20/2017
+ * Time: 12:48 PM
  */
+
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/globals.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/table_rows.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/kit_db/includes/classes/add_lab_to_book.php");
 
-class book_detail
+class commercial_book_detail
 {
     var $connection_array = array();
     var $book_name = '';
@@ -45,17 +46,16 @@ class book_detail
 
     function retrieve_book($bk_id, $global_lab_names_list)
     {
-        $query_select = $this->select_sql->query("book_contents", null, null, $bk_id);
-        //echo $query_select;
+        $query_select = $this->select_sql->query("commercial_book_contents", null, null, $bk_id);
         $sql_execute = $this->conn->runconn_sql_execute($this->connection_array, $query_select);
 
-        $book_name_select = $this->select_sql->query("book_name", null, null, $bk_id);
+        $book_name_select = $this->select_sql->query("commercial_book_name", null, null, $bk_id);
         $book_name_sql_execute = $this->conn->runconn_sql_execute($this->connection_array,$book_name_select);
-  //      var $do_once=0;
+
         $this->book_detail_html_string .= "<header><h1>".$book_name_sql_execute[0]['Book Name']."</h1></header>";
         $this->book_detail_html_string .=  "<p>". count($sql_execute) ." Labs in this book.</p>";
 
-       // $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/grade_level_kit.php?book_id=".$bk_id."\" target=_blank >Grade Level Kit</a> | ";
+        // $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/grade_level_kit.php?book_id=".$bk_id."\" target=_blank >Grade Level Kit</a> | ";
         $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/classroom_level_kit.php?book_id=".$bk_id."\" target=_blank >Classroom Level Kit</a> | ";
         $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/refill_kit.php?book_id=".$bk_id."\" target=_blank >Refill Kits</a> | ";
         $this->book_detail_html_string .=  "<a href=\"".$this->base_url."kit_db/kits/workshop_kits.php?book_id=".$bk_id."\" target=_blank >Workshop Kits</a>";
@@ -79,7 +79,7 @@ class book_detail
         $this->book_detail_html_string .= "<tr id=\"top_row\" class=\"blank_white_row\" style='border-bottom:1px solid grey;'>";
 
 
-            $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
+        $this->book_detail_html_string .= "<td><a id='add_link' onclick=\"addLabToBook(".$this->book_id.")\" href=\"#\">Add a Lab</a></td><td></td><td></td>";//$thispage ? book_id = $this->book_id & add_lab = 1
 
         $this->book_detail_html_string .= "</tr><tr id=\"insert_lab_row\" style='background-color: lemonchiffon;border-bottom:1px solid grey;'></tr>";
 

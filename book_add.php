@@ -47,6 +47,38 @@ if (isset($_POST['book_state']) && $_POST['book_state'] != '')
        }
    }
 }
+elseif (isset($_POST['book_name_supplemental']) && $_POST['book_name_supplemental'] != '')
+{
+    $book_name_supplemental = $_POST['book_name_supplemental'];
+    $book_notes = $_POST['book_notes'];
+    $field_value_array = array("book_state_id_fk"=>null, "book_grade_id_fk"=>null, "book_name_supplemental"=>$book_name_supplemental, "book_notes"=>$book_notes, "book_date_created"=>$current_date);
+    $field_value_check_array = array("book_state_id_fk"=>null, "book_grade_id_fk"=>null, "book_notes"=>$book_notes);
+
+    $table_array = array('books');
+    if ($conn == null)
+    {
+        $conn = new connections();
+
+        $check_existing_book_query = $conn->query_construct('read', $table_array, $field_value_check_array);
+        $execute_check = $conn->runconn_sql_execute($connection_array,$check_existing_book_query);
+
+        if (count($execute_check) < 1 && $book_name_supplemental != '')
+        {
+            $create_query = $conn->query_construct('create',$table_array,$field_value_array);
+            $create_book = $conn->runconn_sql_execute($connection_array, $create_query);
+            $retrieve_inserted_book_id_query = $conn->query_construct('read', $table_array,$field_value_array);
+            //echo $retrieve_inserted_book_id_query;
+            $retrieve_inserted_book_id_sql_execute = $conn->runconn_sql_execute($connection_array,$retrieve_inserted_book_id_query);
+            //echo var_export($retrieve_inserted_book_id_sql_execute, true);
+            //echo $retrieve_inserted_book_id_sql_execute[0]['book_id'];
+        }
+        else
+        {
+            $notes_css_style = "class=\"error\"";
+            $warning_notes = "<p style='color: #FF0000;size: 10px;font-weight: bold;'>Make sure all fields are filled in correctly. Notes field must be unique.</p>";
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -88,12 +120,12 @@ book_date_created
 
                 ?>
                 <br /><br />
-                <label for="book_name_supplemental">Book Name Supplemental: &nbsp;</label><br />
+                <label for="book_name_supplemental">Book Name Supplemental (Use this for books with no state or grade): &nbsp;</label><br />
                 <input type="text" size="60" id="book_name_supplemental" name="book_name_supplemental" value="<?php echo $book_name_supplemental; ?>"><br /><br />
                 <label for="book_notes">Notes (this shows up in the book list when you select state): &nbsp;</label><br />
                 <input type="text" size="60" id="book_notes" <?php echo $notes_css_style; ?> name="book_notes" value="<?php echo $book_notes; ?>"><br /><?php echo $warning_notes; ?><br />
 
-                <input type="submit"  value="Save and add labs" >
+                <input type="submit"  value="Add Book" >
             </form><br /><br />
 
             <?php
